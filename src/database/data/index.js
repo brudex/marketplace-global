@@ -8,5 +8,5 @@ async function  populateMarketZones(){
 	await db.MarketZones.bulkCreate(Zones, { returning: true });
 }
 
-await populateMarketZones();
+populateMarketZones();
 

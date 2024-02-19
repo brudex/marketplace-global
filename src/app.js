@@ -7,6 +7,7 @@ import ejsLayouts from 'express-ejs-layouts';
 import session from 'express-session';
 import passport from 'passport';
 import mogran from 'morgan';
+const appGlobals = require('./app.global.data');
 
 // Import Models[pastas]
 import passportConfig from './config/passport';
@@ -23,7 +24,7 @@ app.use(mogran('dev'));
 app.use(session({
      secret: process.env.SESSION_SECRET_KEY,
      resave: true,
-     saveUninitialized: true,	
+     saveUninitialized: true,
 }));
 
 // PassPort
@@ -49,5 +50,10 @@ app.use(express.static(path.join(__dirname , '..', 'node_modules', 'materialize-
 
 // Rotas
 app.use(routes);
+
+app.use(function (err, req, res, next) {
+	res.locals.categories = appGlobals.categories;
+	res.locals.zones = appGlobals.zones;
+});
 
 export default app;
