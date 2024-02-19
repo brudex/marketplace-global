@@ -2,6 +2,15 @@ import { Router } from "express";
 import UserController from "../controllers/UserController";
 import HomePageController from "../controllers/HomePageController";
 import MarketZoneRouter from "./marketzone";
+
+import MerchantRouter from "./merchant";
+import MerchantShopRouter from "./merchantshop";
+import MerchantShopCategoryRouter from "./merchantshopcategory";
+
+import ProductCategoryRouter from "./productcategory";
+import ProductSubCategoryRouter from "./productsubcategory";
+import ProductSubSubCategoryRouter from "./productsubsubcategory";
+
 import {
 	isAuthenticated,
 	isNotAuthenticated,
@@ -30,6 +39,12 @@ router.post("/login", authenticateLogin);
 router.get("/home", HomePageController.getHomePage);
 
 router.use("/marketzone", MarketZoneRouter);
+router.use("/merchant", MerchantRouter);
+router.use("/merchantshop", MerchantShopRouter);
+router.use("/merchantshopcategory", MerchantShopCategoryRouter);
+router.use("/productcategory", ProductCategoryRouter);
+router.use("/productsubcategory", ProductSubCategoryRouter);
+router.use("/productsubsubcategory", ProductSubSubCategoryRouter);
 
 router.get("/error", (req, res) => {
 	throw new Error("Erro Interno");

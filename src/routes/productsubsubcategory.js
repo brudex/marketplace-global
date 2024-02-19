@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import MarketZoneController from "../controllers/MarketZoneController";
+import ProductSubSubCategoryController from "../controllers/ProductSubSubCategoryController";
 
 import { isAuthenticated } from "../config/auth";
 
@@ -8,8 +8,7 @@ const router = Router();
 
 // Rotas Get
 
-router.post("/create", MarketZoneController.createMarketZone);
-router.get("/getzones", MarketZoneController.getAllZones);
+router.post("/create", ProductSubSubCategoryController.createSubSubCategory);
 
 // router.get("/", MarketZoneController.getIndex);
 // router.get("/about", UserController.getAbout);

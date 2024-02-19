@@ -1,48 +1,56 @@
+import { v4 as uuidv4 } from "uuid";
 module.exports = (sequelize, DataTypes) => {
-    const Product = sequelize.define(
-        "Product",
-        {
-					 	uuid: {
-								type: DataTypes.STRING,
-								allowNull: false,
-								primaryKey: true,
-						},
-						slug: {
-							type: DataTypes.STRING,
-							allowNull: false,
-						},
-            name: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            description: {
-                type: DataTypes.TEXT,
-                allowNull: false,
-            },
-            price: {
-                type: DataTypes.DECIMAL(10, 2),
-                allowNull: false,
-            },
-            quantity: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            zoneUuid: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            categoryUuid: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            subCategoryUuid: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-        },
-        {
-            tableName: "Product"
-        }
-    );
-    return Product;
+	const Product = sequelize.define(
+		"Product",
+		{
+			uuid: {
+				type: DataTypes.UUID,
+				defaultValue: () => uuidv4(),
+				primaryKey: true,
+				allowNull: false,
+			},
+			slug: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			name: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			description: {
+				type: DataTypes.TEXT,
+				allowNull: false,
+			},
+			price: {
+				type: DataTypes.DECIMAL(10, 2),
+				allowNull: false,
+			},
+			quantity: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
+			zoneUuid: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			categoryUuid: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+			subCategoryUuid: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
+		},
+		{
+			tableName: "Product",
+		}
+	);
+
+	Product.associate = (models) => {
+		Product.belongsTo(models.ProductCategory, { foreignKey: "categoryUuid" });
+		Product.hasMany(models.ProductImages, { foreignKey: "productUuid" });
+		Product.hasMany(models.ProductFields, { foreignKey: "productUuid" });
+	};
+	return Product;
 };

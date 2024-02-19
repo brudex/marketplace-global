@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import MarketZoneController from "../controllers/MarketZoneController";
+import MerchantController from "../controllers/MerchantController";
 
 import { isAuthenticated } from "../config/auth";
 
@@ -8,8 +8,7 @@ const router = Router();
 
 // Rotas Get
 
-router.post("/create", MarketZoneController.createMarketZone);
-router.get("/getzones", MarketZoneController.getAllZones);
+router.post("/create", MerchantController.createMerchant);
 
 // router.get("/", MarketZoneController.getIndex);
 // router.get("/about", UserController.getAbout);

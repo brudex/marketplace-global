@@ -3,13 +3,21 @@ import User from "../../../models/User";
 const authController = {
 	async login(req, res) {
 		try {
-			//   const { email, password } = req.body
-			//   const user: = await User.findByCredentials(email, password)
-			//   if (!user) { throw new Error('User not found') }
-			//   if (user === 'invalid-password') { throw new Error('Invalid password') }
-			//   if (user) await user.generateAuthToken()
-			//   res.status(200).json({ status: 'success', data: { token: user.token, user } })
+			const { email, password } = req.body;
+			const user = await User.findByCredentials(email, password);
+			console.log("user>>", user);
+			if (!user) {
+				throw new Error("User not found");
+			}
+			if (user === "invalid-password") {
+				throw new Error("Invalid password");
+			}
+			if (user) await user.generateAuthToken();
+			res
+				.status(200)
+				.json({ status: "success", data: { token: user.token, user } });
 		} catch (error) {
+			console.log("error>>", error);
 			res.status(400).json({
 				status: "error",
 				message: error.message,
