@@ -4,6 +4,8 @@ const {
 	ProductCategory,
 	ProductSubcategory,
 	ProductSubSubcategory,
+	MerchantShop,
+	MerchantShopCategory,
 } = db.sequelize.models;
 const MarketZoneController = {
 	async createMarketZone(req, res) {
@@ -18,27 +20,15 @@ const MarketZoneController = {
 	},
 
 	async getAllZones(req, res) {
-		const { name, description } = req.body;
-
-		const result = await MarketZones.findAll({
+		const mzone = await MarketZones.findAll({
 			include: [
 				{
-					model: ProductCategory,
-					include: [
-						{
-							model: ProductSubcategory,
-							include: [
-								{
-									model: ProductSubSubcategory,
-								},
-							],
-						},
-					],
+					model: MerchantShop,
 				},
 			],
 		});
 		res.json({
-			data: result,
+			data: mzone,
 			message: "Data successfully retrieved",
 			status: "success",
 		});

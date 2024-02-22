@@ -10,8 +10,10 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			merchantShopUuid: DataTypes.STRING,
+			zoneUuid: DataTypes.STRING,
 			name: DataTypes.STRING,
 			description: DataTypes.STRING,
+			icon: DataTypes.STRING,
 		},
 		{
 			tableName: "MerchantShopCategory",

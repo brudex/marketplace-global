@@ -1,26 +1,62 @@
 const uuidv4 = require("uuid").v4;
 
-const MarketZones = [{
-	uuid:  uuidv4(),
-	name: "Ecommerce",
-	description: "Zone 1 description"
-}, {
-	uuid: uuidv4(),
-	name: "Business",
-	description: "Zone 2 description"
-}, {
-	uuid: uuidv4(),
-	name: "Zone 3",
-	description: "Zone 3 description"
-}, {
-	uuid: uuidv4(),
-	name: "Zone 4",
-	description: "Zone 4 description"
-}, {
-	uuid: uuidv4(),
-	name: "Zone 5",
-	description: "Zone 5 description"
-}];
+const MarketZones = [
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Ecommerce",
+		description: "",
+	},
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Payments",
+		description: "",
+	},
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Chat Room",
+		description: "",
+	},
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Business",
+		description: "",
+	},
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Entertainment",
+		description: "",
+	},
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Remittance",
+		description: "",
+	},
 
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Cosmetics",
+		description: "",
+	},
+
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Just Food",
+		description: "",
+	},
+	{
+		uuid: uuidv4(),
+		zoneUuid: uuidv4(),
+		name: "Investment",
+		description: "",
+	},
+];
 
 module.exports = MarketZones;

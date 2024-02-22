@@ -1,30 +1,33 @@
-'use strict';
+"use strict";
 // Import Models[node_modules]
-import express from 'express';
-import bodyParser from 'body-parser';
-import path from 'path';
-import ejsLayouts from 'express-ejs-layouts';
-import session from 'express-session';
-import passport from 'passport';
-import mogran from 'morgan';
+import express from "express";
+import bodyParser from "body-parser";
+import path from "path";
+import ejsLayouts from "express-ejs-layouts";
+import session from "express-session";
+import passport from "passport";
+import mogran from "morgan";
+const appGlobals = require("./app.global.data");
 
 // Import Models[pastas]
-import passportConfig from './config/passport';
-import routes from './routes';
+import passportConfig from "./config/passport";
+import routes from "./routes";
 
 const app = express();
 
 app.use(express.json());
 
 // Morgan
-app.use(mogran('dev'));
+app.use(mogran("dev"));
 
 // Session
-app.use(session({
-     secret: process.env.SESSION_SECRET_KEY,
-     resave: true,
-     saveUninitialized: true,	
-}));
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET_KEY,
+		resave: true,
+		saveUninitialized: true,
+	})
+);
 
 // PassPort
 passportConfig(passport);
@@ -37,15 +40,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // view engine setup
-app.use( ejsLayouts );
-app.set( 'views', path.join( __dirname, 'views' ));
-app.set( 'view engine', 'ejs' );
+app.use(ejsLayouts);
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 // static files
-app.use(express.static(path.join( __dirname, '..','public')));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 // Materialize
-app.use(express.static(path.join(__dirname , '..', 'node_modules', 'materialize-css', 'dist')));
+app.use(
+	express.static(
+		path.join(__dirname, "..", "node_modules", "materialize-css", "dist")
+	)
+);
+
+app.use(async function (err, req, res, next) {
+	console.log("appGlobals.categories>>", appGlobals.categories);
+	res.locals.categories = appGlobals.fetchCategories();
+	res.locals.zones = appGlobals.fetchZones();
+
+	next();
+});
 
 // Rotas
 app.use(routes);
