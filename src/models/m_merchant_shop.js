@@ -4,7 +4,10 @@ module.exports = (sequelize, DataTypes) => {
 		"MerchantShop",
 		{
 			uuid: {
-				type: DataTypes.UUID,
+				type: DataTypes.STRING,
+
+				primaryKey: true,
+				allowNull: false,
 			},
 			shopName: DataTypes.STRING,
 			description: DataTypes.STRING,
@@ -16,29 +19,6 @@ module.exports = (sequelize, DataTypes) => {
 			tableName: "MerchantShop",
 		}
 	);
-
-	MerchantShop.associate = (models) => {
-		MerchantShop.belongsTo(models.Merchant, {
-			foreignKey: "merchantUuid",
-			onDelete: "CASCADE",
-		});
-		MerchantShop.belongsTo(models.MarketZones, {
-			foreignKey: "zoneUuid",
-			onDelete: "CASCADE",
-		});
-		// MerchantShop.belongsTo(models.MerchantShopCategory, {
-		// 	foreignKey: "shopCategoryUuid",
-		// 	onDelete: "CASCADE",
-		// });
-	};
-
-	MerchantShop.associate = (models) => {
-		MerchantShop.belongsTo(models.MarketZones, {
-			foreignKey: "uuid",
-			targetKey: "uuid",
-			onDelete: "CASCADE",
-		});
-	};
 
 	return MerchantShop;
 };

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			uuid: {
 				type: DataTypes.STRING,
-				defaultValue: () => uuidv4(),
+
 				primaryKey: true,
 				allowNull: false,
 			},
@@ -47,11 +47,6 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 
-	Product.associate = (models) => {
-		Product.belongsTo(models.ProductCategory, { foreignKey: "categoryUuid" });
-		Product.hasMany(models.ProductImages, { foreignKey: "productUuid" });
-		Product.hasMany(models.ProductFields, { foreignKey: "productUuid" });
-	};
 	return Product;
 };
 

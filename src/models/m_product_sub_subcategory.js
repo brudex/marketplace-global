@@ -5,8 +5,7 @@ module.exports = (sequelize, DataTypes) => {
 		"ProductSubSubcategory",
 		{
 			uuid: {
-				type: DataTypes.UUID,
-				defaultValue: () => uuidv4(),
+				type: DataTypes.STRING,
 				primaryKey: true,
 
 				allowNull: false,
@@ -24,12 +23,6 @@ module.exports = (sequelize, DataTypes) => {
 			tableName: "ProductSubSubcategory",
 		}
 	);
-
-	ProductSubSubcategory.associate = (models) => {
-		ProductSubSubcategory.belongsTo(models.ProductSubcategory, {
-			foreignKey: "subcategoryUuid",
-		});
-	};
 
 	return ProductSubSubcategory;
 };
