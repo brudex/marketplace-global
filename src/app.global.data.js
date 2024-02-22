@@ -1,20 +1,38 @@
-const db = require("./models");
+import db from "./models";
+const { MerchantShopCategory, MarketZones } = db.sequelize.models;
 const AppGlobalData = {};
 
-function fetchCategories() {
-	 db.MerchantShopCategory.findAll().then(function (categories) {
-		AppGlobalData.categories = categories;
-	 })
+export async function fetchCategories() {
+	const mshopcategory = await MerchantShopCategory.findAll({ raw: true });
+	AppGlobalData.categories = mshopcategory;
+	return mshopcategory;
 }
 
+export async function fetchZones() {
+	const mzone = await MarketZones.findAll();
 
-function fetchZones() {
-	 db.MarketZones.findAll().then(function (zones) {
-		AppGlobalData.zones = zones;
-	 })
+	// const mzone = await MarketZones.findAll({
+	// 	include: [
+	// 		{
+	// 			model: MerchantShop,
+	// 			include: [
+	// 				{
+	// 					model: MerchantShopCategory,
+	// 					include: [
+	// 						{
+	// 							model: ProductSubSubcategory,
+	// 						},
+	// 					],
+	// 				},
+	// 			],
+	// 		},
+	// 	],
+	// });
+	AppGlobalData.zones = mzone;
+	return mzone;
+	// console.log("mzone", mzone);
 }
 
-fetchZones();
 fetchCategories();
-
-module.exports= AppGlobalData;
+fetchZones();
+module.exports = AppGlobalData;
