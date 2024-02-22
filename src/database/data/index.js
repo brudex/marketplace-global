@@ -57,8 +57,8 @@ async function populateMerchantShopCategory() {
 	});
 }
 
-populateMerchantShop();
-populateMarketZones();
+// populateMerchantShop();
+// populateMarketZones();
 
 //populateMerchant();
-populateMerchantShopCategory();
+//populateMerchantShopCategory();

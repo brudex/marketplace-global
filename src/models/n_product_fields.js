@@ -24,8 +24,5 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 
-	ProductFields.associate = (models) => {
-		ProductFields.belongsTo(models.Product, { foreignKey: "productUuid" });
-	};
 	return ProductFields;
 };

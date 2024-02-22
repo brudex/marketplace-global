@@ -11,28 +11,11 @@ export async function fetchCategories() {
 export async function fetchZones() {
 	const mzone = await MarketZones.findAll();
 
-	// const mzone = await MarketZones.findAll({
-	// 	include: [
-	// 		{
-	// 			model: MerchantShop,
-	// 			include: [
-	// 				{
-	// 					model: MerchantShopCategory,
-	// 					include: [
-	// 						{
-	// 							model: ProductSubSubcategory,
-	// 						},
-	// 					],
-	// 				},
-	// 			],
-	// 		},
-	// 	],
-	// });
 	AppGlobalData.zones = mzone;
 	return mzone;
 	// console.log("mzone", mzone);
 }
 
-fetchCategories();
-fetchZones();
+// fetchCategories();
+// fetchZones();
 module.exports = AppGlobalData;

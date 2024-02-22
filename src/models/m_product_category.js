@@ -4,14 +4,12 @@ module.exports = (sequelize, DataTypes) => {
 		"ProductCategory",
 		{
 			uuid: {
-				type: DataTypes.UUID,
-				defaultValue: () => uuidv4(),
+				type: DataTypes.STRING,
 				primaryKey: true,
-
 				allowNull: false,
 			},
 			zoneUuid: {
-				type: DataTypes.UUID,
+				type: DataTypes.STRING,
 				allowNull: false,
 			},
 			name: {
@@ -24,9 +22,5 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 
-	ProductCategory.associate = (models) => {
-		ProductCategory.hasMany(models.Product, { foreignKey: "categoryUuid" });
-		ProductCategory.belongsTo(models.MarketZones, { foreignKey: "zoneUuid" });
-	};
 	return ProductCategory;
 };

@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
 		"MerchantShopCategory",
 		{
 			uuid: {
-				type: DataTypes.UUID,
-				defaultValue: () => uuidv4(),
+				type: DataTypes.STRING,
 				primaryKey: false,
 				allowNull: false,
 			},
@@ -20,11 +19,5 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	);
 
-	MerchantShopCategory.associate = (models) => {
-		MerchantShopCategory.hasMany(models.MerchantShop, {
-			foreignKey: "shopCategoryUuid",
-			onDelete: "CASCADE",
-		});
-	};
 	return MerchantShopCategory;
 };
