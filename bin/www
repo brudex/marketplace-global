@@ -19,6 +19,6 @@ server.listen(PORT, () => {
 		typeof serverAddress === "string"
 			? "pipe " + serverAddress
 			: "port " + serverAddress.port;
-	require("../src/database/data");
+	// require("../src/database/data");
 	console.log(`\nServer listening ${bindServer} \n`);
 });
