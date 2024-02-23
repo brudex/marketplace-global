@@ -50,5 +50,8 @@
 		"nodemon": "^2.0.12",
 		"sequelize-cli": "^6.2.0",
 		"sucrase": "^3.35.0"
-	}
+	},
+	"engines": {
+	"node": ">=16.19.1 <18"
+}
 }
