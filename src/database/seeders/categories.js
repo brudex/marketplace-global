@@ -40,7 +40,6 @@ const MarketShopCategory = [
 		zoneUuid: MarketZones[3].uuid,
 		merchantShopUuid: MerchantShop[0].uuid,
 		name: "Recruitment",
-
 		description: "",
 	},
 	{

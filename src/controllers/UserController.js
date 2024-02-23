@@ -1,6 +1,6 @@
 import { User } from "../models";
 
-import AppGlobalData from "../app.global.data";
+// import AppGlobalData from "../app.global.data";
 
 // Rotas GET
 const getLogin = (req, res) => {
@@ -13,8 +13,8 @@ const getRegister = (req, res) => {
 
 const getIndex = async (req, res) => {
 	//res.locals.user = { name: "John", email: "john@example.com" };
-	res.locals.categories = AppGlobalData.categories;
-	res.locals.zones = AppGlobalData.zones;
+	// res.locals.categories = AppGlobalData.categories;
+	// res.locals.zones = AppGlobalData.zones;
 
 	console.log("AppGlobalData.categories", AppGlobalData.categories);
 	res.render("page", { session: false });

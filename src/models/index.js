@@ -4,6 +4,7 @@ const path = require("path");
 const { Sequelize, DataTypes } = require("sequelize");
 const configDB = require("./../database/config/database");
 
+
 const env = process.env.NODE_ENV || "development";
 const config = configDB[env];
 
@@ -40,7 +41,13 @@ sequelize
 	.authenticate()
 	.then(() => console.log("DB connection has been established successfully."))
 	.then(() => {
-		sequelize.sync({ force: false });
+		sequelize.sync({ force: false }).then(function (){
+			setTimeout(function (){
+				const seeders = require("./../database/seeders");
+				console.log('Seeding data>>>')
+				seeders.seedData()
+			},3000)
+		});
 	})
 	.catch((err) => console.error("Unable to connect to the database:", err));
 
