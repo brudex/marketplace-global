@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"description": "* Node framework: Express;\r * ORM: Sequelize;\r * BD: MySql;\r * Template engine: EJS.",
 	"main": "./bin/www",
+	"type": "module",
 	"scripts": {
 		"start": "node ./bin/www",
 		"dev": "nodemon --exec sucrase-node ./bin/www",
