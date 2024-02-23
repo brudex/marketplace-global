@@ -7,10 +7,8 @@ const PORT = process.env.PORT || 3400;
 const http = require("http");
 // const app =
 // 	ENV === "development" ? require("../src/app") : require("../dist/app");
-
-const app =require("../src/app") ;
+const app =require("../src/app.js") ;
 const options = {}; // Http createServer configuration options
-
 const server = http.createServer(options, app.default);
 
 server.listen(PORT, () => {

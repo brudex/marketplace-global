@@ -2,8 +2,7 @@
 	"name": "marketplace-app",
 	"version": "0.1.0",
 	"description": "* Node framework: Express;\r * ORM: Sequelize;\r * BD: MySql;\r * Template engine: EJS.",
-	"main": "./bin/www",
-	"type": "module",
+	"main": "./bin/www.js",
 	"scripts": {
 		"start": "node ./bin/www",
 		"dev": "nodemon --exec sucrase-node ./bin/www",
@@ -14,16 +13,7 @@
 		"clean": "rm -fr dist",
 		"build": "sucrase ./src -d ./dist --transforms imports"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/CofferHub/nodejs-mvc-boilerplate.git"
-	},
 	"author": "cache-technology",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/CofferHub/nodejs-mvc-boilerplate/issues"
-	},
-	"homepage": "https://github.com/CofferHub/nodejs-mvc-boilerplate#readme",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
