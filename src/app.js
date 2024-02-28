@@ -1,20 +1,20 @@
 "use strict";
 // Import Models[node_modules]
-import express from "express";
-import bodyParser from "body-parser";
-import path from "path";
-import ejsLayouts from "express-ejs-layouts";
-import session from "express-session";
-import passport from "passport";
-import mogran from "morgan";
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const ejsLayouts = require("express-ejs-layouts");
+const session = require("express-session");
+const passport = require("passport");
+const morgan = require("morgan"); // Corrected the typo
 // Import Models[pastas]
-import passportConfig from "./config/passport";
+const passportConfig = require("./config/passport");
 import routes from "./routes";
-import appLocalsData from "./app.locals.data";
+const appLocalsData = require("./app.locals.data");
 const app = express();
 app.use(express.json());
 // Morgan
-app.use(mogran("dev"));
+app.use(morgan("dev"));
 
 // Session
 app.use(
