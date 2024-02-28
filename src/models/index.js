@@ -46,4 +46,6 @@ sequelize
 
 console.log("db", db);
 
-export default db;
+module.exports = db;
+
+//export default db;

@@ -10,6 +10,7 @@ const router = Router();
 
 router.post("/create", MarketZoneController.createMarketZone);
 router.get("/getzones", MarketZoneController.getAllZones);
+router.get("/zones/:id", MarketZoneController.renderZoneById);
 
 // router.get("/", MarketZoneController.getIndex);
 // router.get("/about", UserController.getAbout);
@@ -24,4 +25,4 @@ router.get("/getzones", MarketZoneController.getAllZones);
 // 	throw new Error("Erro Interno");
 // });
 
-export default router;
+module.exports = router;

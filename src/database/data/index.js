@@ -1,9 +1,10 @@
 const Zones = require("./zones");
 const MerchantShopData = require("./merchantshop");
 const MarketShopCategoryData = require("./categories");
-import MerchantData from "./merchant";
+const MerchantData = require("./merchant");
 
-import db from "../../models";
+const db = require("../../models");
+
 const uuidv4 = require("uuid").v4;
 const { MarketZones, MerchantShop, MerchantShopCategory, Merchant } =
 	db.sequelize.models;
@@ -57,8 +58,7 @@ async function populateMerchantShopCategory() {
 	});
 }
 
-// populateMerchantShop();
-// populateMarketZones();
-
-//populateMerchant();
-//populateMerchantShopCategory();
+populateMerchantShop();
+populateMarketZones();
+populateMerchant();
+populateMerchantShopCategory();

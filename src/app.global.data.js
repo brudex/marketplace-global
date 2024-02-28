@@ -1,4 +1,4 @@
-import db from "./models";
+const db = require("./models");
 const { MerchantShopCategory, MarketZones } = db.sequelize.models;
 const AppGlobalData = {};
 
@@ -9,13 +9,13 @@ export async function fetchCategories() {
 }
 
 export async function fetchZones() {
-	const mzone = await MarketZones.findAll();
+	const mzone = await MarketZones.findAll({ raw: true });
 
 	AppGlobalData.zones = mzone;
 	return mzone;
 	// console.log("mzone", mzone);
 }
 
-// fetchCategories();
-// fetchZones();
+fetchCategories();
+fetchZones();
 module.exports = AppGlobalData;

@@ -1,8 +1,6 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-import ProductSubSubCategoryController from "../controllers/ProductSubSubCategoryController";
-
-import { isAuthenticated } from "../config/auth";
+const ProductSubSubCategoryController = require("../controllers/ProductSubSubCategoryController");
 
 const router = Router();
 
@@ -23,4 +21,4 @@ router.post("/create", ProductSubSubCategoryController.createSubSubCategory);
 // 	throw new Error("Erro Interno");
 // });
 
-export default router;
+module.exports = router;

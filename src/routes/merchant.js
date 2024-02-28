@@ -1,8 +1,6 @@
-import { Router } from "express";
+const Router = require("express").Router;
 
-import MerchantController from "../controllers/MerchantController";
-
-import { isAuthenticated } from "../config/auth";
+const MerchantController = require("../controllers/MerchantController");
 
 const router = Router();
 
@@ -22,5 +20,4 @@ router.post("/create", MerchantController.createMerchant);
 // router.get("/error", (req, res) => {
 // 	throw new Error("Erro Interno");
 // });
-
-export default router;
+module.exports = router;

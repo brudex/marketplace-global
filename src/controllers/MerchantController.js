@@ -1,5 +1,7 @@
-import db from "../models";
+const db = require("../models");
+
 const { Merchant } = db.sequelize.models;
+
 const MerchantController = {
 	async createMerchant(req, res) {
 		const {
@@ -32,4 +34,6 @@ const MerchantController = {
 	},
 };
 
-export default MerchantController;
+module.exports = MerchantController;
+
+// export default MerchantController;

@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 module.exports = (sequelize, DataTypes) => {
 	const ProductSubcategory = sequelize.define(
 		"ProductSubcategory",

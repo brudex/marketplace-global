@@ -1,8 +1,8 @@
 const uuidv4 = require("uuid").v4;
 
-import Merchant from "./merchant";
-import { defaultShop } from "./zones";
-console.log("defaultShop>>", defaultShop);
+const Merchant = require("./merchant");
+const { defaultShop } = require("./zones");
+
 const MerchantShop = [
 	{
 		uuid: uuidv4(),

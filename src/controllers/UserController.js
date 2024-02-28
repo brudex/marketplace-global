@@ -1,14 +1,18 @@
-import { User } from "../models";
-
-import AppGlobalData from "../app.global.data";
+const AppGlobalData = require("../app.global.data");
 
 // Rotas GET
 const getLogin = (req, res) => {
-	res.render("page/login", { session: false, layout: "auth" });
+	//res.render("page/login", { session: false, layout: "login" });
+	res.locals.zones = AppGlobalData.zones;
+	res.render("page/auth", { title: "Login Page", layout: "layout/auth" });
 };
 
 const getRegister = (req, res) => {
-	res.render("page/register", { session: false });
+	res.locals.zones = AppGlobalData.zones;
+	res.render("page/auth#sign-up", {
+		title: "Login Page",
+		layout: "layout/auth",
+	});
 };
 
 const getIndex = async (req, res) => {
@@ -17,6 +21,7 @@ const getIndex = async (req, res) => {
 	res.locals.zones = AppGlobalData.zones;
 
 	console.log("AppGlobalData.categories", AppGlobalData.categories);
+	console.log("AppGlobalData.zones", AppGlobalData.zones);
 	res.render("page", { session: false });
 };
 
@@ -29,7 +34,7 @@ const getContact = (req, res) => {
 };
 
 const getAuth = (req, res) => {
-	res.render("page/auth");
+	res.render("page/login");
 };
 
 const getLogout = (req, res) => {
@@ -37,7 +42,16 @@ const getLogout = (req, res) => {
 	res.redirect("/"); // ADD rota depois do logout
 };
 
-export default {
+// export default {
+// 	getLogin,
+// 	getRegister,
+// 	getIndex,
+// 	getAbout,
+// 	getContact,
+// 	getAuth,
+// 	getLogout,
+// };
+module.exports = {
 	getLogin,
 	getRegister,
 	getIndex,

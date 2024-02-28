@@ -1,4 +1,4 @@
-import db from "../models";
+const db = require("../models");
 const { ProductSubcategory } = db.sequelize.models;
 const ProductSubCategoryController = {
 	async createProductSubCategory(req, res) {
@@ -26,4 +26,4 @@ const ProductSubCategoryController = {
 	},
 };
 
-export default ProductSubCategoryController;
+module.exports = ProductSubCategoryController;

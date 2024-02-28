@@ -1,6 +1,6 @@
 const uuidv4 = require("uuid").v4;
-import MarketZones from "./zones";
-import MerchantShop from "./merchantshop";
+const MarketZones = require("./zones");
+const MerchantShop = require("./merchantshop");
 
 const MarketShopCategory = [
 	{

@@ -1,4 +1,4 @@
-import db from "../models";
+const db = require("../models");
 const { MerchantShopCategory } = db.sequelize.models;
 const MerchantShopCategoryController = {
 	async createMerchantShopCategory(req, res) {
@@ -23,4 +23,4 @@ const MerchantShopCategoryController = {
 	},
 };
 
-export default MerchantShopCategoryController;
+module.exports = MerchantShopCategoryController;

@@ -1,22 +1,22 @@
-import { Router } from "express";
-import UserController from "../controllers/UserController";
-import HomePageController from "../controllers/HomePageController";
-import MarketZoneRouter from "./marketzone";
+const { Router } = require("express");
+const UserController = require("../controllers/UserController");
+const HomePageController = require("../controllers/HomePageController");
+const MarketZoneRouter = require("./marketzone");
 
-import MerchantRouter from "./merchant";
-import MerchantShopRouter from "./merchantshop";
-import MerchantShopCategoryRouter from "./merchantshopcategory";
+const MerchantRouter = require("./merchant");
+const MerchantShopRouter = require("./merchantshop");
+const MerchantShopCategoryRouter = require("./merchantshopcategory");
 
-import ProductCategoryRouter from "./productcategory";
-import ProductSubCategoryRouter from "./productsubcategory";
-import ProductSubSubCategoryRouter from "./productsubsubcategory";
+const ProductCategoryRouter = require("./productcategory");
+const ProductSubCategoryRouter = require("./productsubcategory");
+const ProductSubSubCategoryRouter = require("./productsubsubcategory");
 
-import {
+const {
 	isAuthenticated,
 	isNotAuthenticated,
 	authenticateLogin,
 	authenticateRegister,
-} from "../config/auth";
+} = require("../config/auth");
 
 const router = Router();
 
@@ -50,4 +50,4 @@ router.get("/error", (req, res) => {
 	throw new Error("Erro Interno");
 });
 
-export default router;
+module.exports = router;

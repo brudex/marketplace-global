@@ -54,16 +54,16 @@
 				</a>
 				<form method="get" action="#" class="header-search hs-expanded hs-round d-none d-md-flex input-wrapper">
 					<div class="select-box">
-						<select id="changeZone" onchange="routeToZone()">
-							<%zones.forEach(data => { %>
+						<select id="changeZone">
+							<%categories.forEach(data => { %>
 
-							<option value="<%=data.zoneUuid%>"><%=data.name%></option>
+							<option value="<%=data.zoneUuid%>""><%=data.name%></option>
 							<% }); %>
 						</select>
 					</div>
 					<input type=" text" class="form-control" name="search" id="search" placeholder="Search in..." required />
-					<button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
-					</button>
+							<button class="btn btn-search" type="submit"><i class="w-icon-search"></i>
+							</button>
 				</form>
 			</div>
 			<div class="header-right ml-4">
@@ -264,13 +264,13 @@
 					<nav class="main-nav">
 						<ul class="menu active-underline">
 
-							<!-- <%zones.forEach(data => { %>
+							<%categories.forEach(data => { %>
 							<li>
 								<a href="shop-banner-sidebar.html"><%=data.name%></a>
 
 								<!-- Start of Megamenu -->
 
-							<% if(data.name=='Payments' || data.name=='Business' ||  data.name=='Chat Room' || data.name=='Entertainment'){%>
+								<!-- <% if(data.name=='Payments' || data.name=='Business' ||  data.name=='Chat Room' || data.name=='Entertainment'){%>
 							<ul class="megamenu">
 								<li>
 									<h4 class="menu-title">Shop Pages</h4>
@@ -303,7 +303,7 @@
 
 							</ul>
 							<%}%>
-								<!-- End of Megamenu -->
+							
 							</li>
 
 							<% }); %>
@@ -393,13 +393,12 @@
 </header>
 
 <script>
-	function routeToZone() {
-		var selectedPage = document.getElementById("changeZone").value
-		console.log("selectedPage>>", selectedPage)
-		if (selectedPage) {
-			window.location.href = "/marketzone/zones/" + selectedPage
-		}
-	}
+	// function routeToZone() {
+	// 	var selectedPage = document.getElementById("changeZone").value;
+	// 	if (selectedPage) {
+	// 		window.location.href = "/zones/" + selectedPage
+	// 	}
+	// }
 
 </script>
 <% } %>

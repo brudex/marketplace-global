@@ -1,8 +1,6 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-import MerchantShopCategoryController from "../controllers/MerchantShopCategoryController";
-
-import { isAuthenticated } from "../config/auth";
+const MerchantShopCategoryController = require("../controllers/MerchantShopCategoryController");
 
 const router = Router();
 
@@ -26,4 +24,4 @@ router.post(
 // 	throw new Error("Erro Interno");
 // });
 
-export default router;
+module.exports = router;
