@@ -40,9 +40,17 @@ sequelize
 	.authenticate()
 	.then(() => console.log("DB connection has been established successfully."))
 	.then(() => {
-		sequelize.sync({ force: false });
+		sequelize.sync({ force: false }).then(function () {
+			setTimeout(function () {
+				const seeders = require("./../database/seeders");
+				console.log("Seeding data>>>");
+				seeders.seedData();
+			}, 3000);
+		});
 	})
 	.catch((err) => console.error("Unable to connect to the database:", err));
+
+// Close the database connection
 
 console.log("db", db);
 

@@ -1,16 +1,14 @@
 #!/usr/bin/env node
 
 require("dotenv").config();
-
 const ENV = process.env.NODE_ENV || "development";
 const PORT = process.env.PORT || 3400;
 
 const http = require("http");
-const app =
-	ENV === "development" ? require("../src/app") : require("../dist/app");
-
+// const app =
+// 	ENV === "development" ? require("../src/app") : require("../dist/app");
+const app =require("../src/app.js") ;
 const options = {}; // Http createServer configuration options
-
 const server = http.createServer(options, app.default);
 
 server.listen(PORT, () => {
@@ -19,6 +17,6 @@ server.listen(PORT, () => {
 		typeof serverAddress === "string"
 			? "pipe " + serverAddress
 			: "port " + serverAddress.port;
-	require("../src/database/data");
-	console.log(`\nServer listening ${bindServer} \n`);
+
+ 	console.log(`\nServer listening ${bindServer} \n`);
 });

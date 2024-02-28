@@ -11,6 +11,7 @@ const ProductCategoryRouter = require("./productcategory");
 const ProductSubCategoryRouter = require("./productsubcategory");
 const ProductSubSubCategoryRouter = require("./productsubsubcategory");
 
+const appLocalsData = require("../app.locals.data");
 const {
 	isAuthenticated,
 	isNotAuthenticated,
@@ -50,4 +51,19 @@ router.get("/error", (req, res) => {
 	throw new Error("Erro Interno");
 });
 
-module.exports = router;
+// let info = [];
+// const data = appLocalsData.populateAppLocals(function (appLocals) {
+// 	// console.log("Apps locals Populated >>", appLocals);
+// 	return appLocals;
+// });
+
+// console.log("data>>", data);
+
+// router.use(async function (err, req, res, next) {
+// 	res.locals.categories = [];
+// 	res.locals.zones = [];
+// 	next();
+// });
+
+export default router;
+// module.exports = router;

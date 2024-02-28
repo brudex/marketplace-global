@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import db from "../models";
 const { User } = db.sequelize.models;
 
-export default async (passport) => {
+module.exports = async (passport) => {
 	passport.use(
 		"local-login",
 		new LocalStrategy(

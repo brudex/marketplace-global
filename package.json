@@ -1,8 +1,8 @@
 {
-	"name": "mvc-template",
+	"name": "marketplace-app",
 	"version": "0.1.0",
 	"description": "* Node framework: Express;\r * ORM: Sequelize;\r * BD: MySql;\r * Template engine: EJS.",
-	"main": "./bin/www",
+	"main": "./bin/www.js",
 	"scripts": {
 		"start": "node ./bin/www",
 		"dev": "nodemon --exec sucrase-node ./bin/www",
@@ -13,16 +13,7 @@
 		"clean": "rm -fr dist",
 		"build": "sucrase ./src -d ./dist --transforms imports"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/CofferHub/nodejs-mvc-boilerplate.git"
-	},
-	"author": "",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/CofferHub/nodejs-mvc-boilerplate/issues"
-	},
-	"homepage": "https://github.com/CofferHub/nodejs-mvc-boilerplate#readme",
+	"author": "cache-technology",
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.19.0",
@@ -34,7 +25,6 @@
 		"materialize-css": "^1.0.0",
 		"morgan": "^1.10.0",
 		"multer": "^1.4.5-lts.1",
-		"multer-gridfs-storage": "^5.0.2",
 		"passport": "^0.4.1",
 		"passport-local": "^1.0.0",
 		"pg": "^8.5.1",
@@ -50,5 +40,8 @@
 		"nodemon": "^2.0.12",
 		"sequelize-cli": "^6.2.0",
 		"sucrase": "^3.35.0"
-	}
+	},
+	"engines": {
+	"node": ">=16.19.0 <18"
+}
 }

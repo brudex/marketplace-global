@@ -2,10 +2,9 @@ const Zones = require("./zones");
 const MerchantShopData = require("./merchantshop");
 const MarketShopCategoryData = require("./categories");
 const MerchantData = require("./merchant");
-
 const db = require("../../models");
-
 const uuidv4 = require("uuid").v4;
+
 const { MarketZones, MerchantShop, MerchantShopCategory, Merchant } =
 	db.sequelize.models;
 
@@ -58,7 +57,13 @@ async function populateMerchantShopCategory() {
 	});
 }
 
-populateMerchantShop();
-populateMarketZones();
-populateMerchant();
-populateMerchantShopCategory();
+async function seedData() {
+	await populateMerchantShop();
+	// populateMarketZones();
+	await populateMerchant();
+	await populateMerchantShopCategory();
+}
+
+module.exports = {
+	seedData,
+};
