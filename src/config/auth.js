@@ -21,7 +21,7 @@ const authenticateRegister = passport.authenticate("local-register", {
 	failureRedirect: "/register", // ADD rota de falha no register
 });
 
-export {
+module.exports = {
 	isAuthenticated,
 	isNotAuthenticated,
 	authenticateLogin,
