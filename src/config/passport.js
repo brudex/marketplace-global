@@ -1,6 +1,7 @@
 "use strict";
-import { Strategy as LocalStrategy } from "passport-local";
-import db from "../models";
+const LocalStrategy = require("passport-local").Strategy;
+
+const db = require("../models");
 const { User } = db.sequelize.models;
 
 module.exports = async (passport) => {

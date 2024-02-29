@@ -69,4 +69,4 @@ const MarketZoneController = {
 	},
 };
 
-export default MarketZoneController;
+module.exports = MarketZoneController;

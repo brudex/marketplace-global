@@ -9,7 +9,8 @@ const passport = require("passport");
 const morgan = require("morgan"); // Corrected the typo
 // Import Models[pastas]
 const passportConfig = require("./config/passport");
-import routes from "./routes";
+const routes = require("./routes");
+
 const appLocalsData = require("./app.locals.data");
 const app = express();
 app.use(express.json());

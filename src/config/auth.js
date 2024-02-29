@@ -1,5 +1,5 @@
 "use strict";
-import passport from "passport";
+const passport = require("passport");
 
 const isAuthenticated = (req, res, next) => {
 	if (req.isAuthenticated()) return next();

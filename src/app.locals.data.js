@@ -1,4 +1,4 @@
-import db from "./models";
+const db = require("./models");
 const { MerchantShopCategory, MarketZones } = db.sequelize.models;
 const AppLocalsData = { categories: [], zones: [] };
 

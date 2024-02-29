@@ -1,8 +1,6 @@
-import { Router } from "express";
-
-import MarketZoneController from "../controllers/MarketZoneController";
-
-import { isAuthenticated } from "../config/auth";
+const { Router } = require("express");
+const MarketZoneController = require("../controllers/MarketZoneController");
+const { isAuthenticated } = require("../config/auth");
 
 const router = Router();
 
