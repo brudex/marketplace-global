@@ -1,10 +1,9 @@
-const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
 
 const ProductSubCategoryController = require("../controllers/ProductSubCategoryController");
 
 // import { isAuthenticated } from "../config/auth";
-
-const router = Router();
 
 // Rotas Get
 

@@ -1,17 +1,15 @@
-const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
 const UserController = require("../controllers/UserController");
 const HomePageController = require("../controllers/HomePageController");
 const MarketZoneRouter = require("./marketzone");
-
 const MerchantRouter = require("./merchant");
 const MerchantShopRouter = require("./merchantshop");
 const MerchantShopCategoryRouter = require("./merchantshopcategory");
-
 const ProductCategoryRouter = require("./productcategory");
 const ProductSubCategoryRouter = require("./productsubcategory");
 const ProductSubSubCategoryRouter = require("./productsubsubcategory");
 
-const appLocalsData = require("../app.locals.data");
 const {
 	isAuthenticated,
 	isNotAuthenticated,
@@ -19,7 +17,7 @@ const {
 	authenticateRegister,
 } = require("../config/auth");
 
-const router = Router();
+
 
 // Rotas Get
 router.get("/", UserController.getIndex);
