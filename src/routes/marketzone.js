@@ -1,8 +1,8 @@
-const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
 const MarketZoneController = require("../controllers/MarketZoneController");
 const { isAuthenticated } = require("../config/auth");
 
-const router = Router();
 
 // Rotas Get
 

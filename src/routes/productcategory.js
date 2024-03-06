@@ -1,11 +1,9 @@
-const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
 
 const ProductCategoryController = require("../controllers/ProductCategoryController");
 
-const router = Router();
-
 // Rotas Get
-
 router.post("/create", ProductCategoryController.createProductCategory);
 
 // router.get("/", MarketZoneController.getIndex);

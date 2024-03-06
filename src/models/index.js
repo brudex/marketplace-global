@@ -51,9 +51,6 @@ sequelize
 	.catch((err) => console.error("Unable to connect to the database:", err));
 
 // Close the database connection
-
 console.log("db", db);
-
 module.exports = db;
-
 //export default db;

@@ -1,8 +1,7 @@
-const Router = require("express").Router;
-
+const express = require("express");
+const router = express.Router();
 const MerchantController = require("../controllers/MerchantController");
 
-const router = Router();
 
 // Rotas Get
 

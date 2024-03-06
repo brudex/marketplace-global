@@ -1,9 +1,7 @@
-const { Router } = require("express");
+const express = require("express");
+const router = express.Router();
 
 const ProductSubSubCategoryController = require("../controllers/ProductSubSubCategoryController");
-
-const router = Router();
-
 // Rotas Get
 
 router.post("/create", ProductSubSubCategoryController.createSubSubCategory);
