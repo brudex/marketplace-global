@@ -88,4 +88,4 @@ app.use(function (err, req, res, next) {
 // Rotas
 app.use(routes);
 
-module.exports =  app;
+module.exports = app;
