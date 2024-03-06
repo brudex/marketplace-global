@@ -4,13 +4,17 @@ const { User } = require("../models");
 // Rotas GET
 const getLogin = (req, res) => {
 	//res.render("page/login", { session: false, layout: "login" });
-	res.locals.zones = AppGlobalData.zones;
-	res.render("page/auth", { title: "Login Page", layout: "layout/auth" });
+	// res.locals.zones = AppGlobalData.zones;
+	// res.render("page/auth", { title: "Login Page", layout: "layout/auth" });
+	res.render("page/login", {
+		title: "Login Page",
+		layout: "layout/auth",
+	});
 };
 
 const getRegister = (req, res) => {
-	res.locals.zones = AppGlobalData.zones;
-	res.render("page/auth#sign-up", {
+	//res.locals.zones = AppGlobalData.zones;
+	res.render("page/register", {
 		title: "Login Page",
 		layout: "layout/auth",
 	});
@@ -36,7 +40,7 @@ const getContact = (req, res) => {
 };
 
 const getAuth = (req, res) => {
-	res.render("page/login");
+	res.render("page/auth");
 };
 
 const getLogout = (req, res) => {
