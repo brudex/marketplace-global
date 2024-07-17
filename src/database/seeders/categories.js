@@ -5,30 +5,26 @@ const MerchantShop = require("./merchantshop");
 const MarketShopCategory = [
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[1].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
-		name: "Merchant",
+		zoneUuid: MarketZones[1].zoneUuid,
 
+		name: "Merchant",
 		description: "",
 	},
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[1].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[1].zoneUuid,
 		name: "Building Materials",
 		description: "",
 	},
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[1].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[1].zoneUuid,
 		name: "Home Services",
 		description: "",
 	},
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[1].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[1].zoneUuid,
 		name: "Cars",
 		description: "",
 	},
@@ -37,22 +33,19 @@ const MarketShopCategory = [
 
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[3].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[3].zoneUuid,
 		name: "Recruitment",
 		description: "",
 	},
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[3].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[3].zoneUuid,
 		name: "Video/Business Empowerment & Seminars/Summits",
 		description: "",
 	},
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[3].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[3].zoneUuid,
 		name: "Entrepreneurs Networking",
 		description: "",
 	},
@@ -60,8 +53,7 @@ const MarketShopCategory = [
 	// Entertainment
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[4].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[4].zoneUuid,
 		name: "Vidoes/Music",
 		description: "",
 	},
@@ -70,15 +62,13 @@ const MarketShopCategory = [
 
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[2].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[2].zoneUuid,
 		name: "Hangout/Networking",
 		description: "",
 	},
 	{
 		uuid: uuidv4(),
-		zoneUuid: MarketZones[2].uuid,
-		merchantShopUuid: MerchantShop[0].uuid,
+		zoneUuid: MarketZones[2].zoneUuid,
 		name: "Services",
 		description: "",
 	},

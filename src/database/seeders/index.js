@@ -22,6 +22,7 @@ async function populateMerchant() {
 	if (existingZones.length > 0) return;
 
 	await Merchant.bulkCreate(MerchantData, { returning: true });
+	//await Merchant.create(MerchantData, { returning: true });
 }
 
 async function populateMerchantShop() {
@@ -41,6 +42,7 @@ async function populateMerchantShop() {
 					zoneUuid: data[0].zoneUuid,
 					shopName: "Valtrine Shop",
 					merchantUuid: MerchantData[0].uuid,
+					shopCategoryUuid: MarketShopCategoryData[0].uuid,
 				},
 			],
 			{ returning: true }
@@ -52,6 +54,9 @@ async function populateMerchantShopCategory() {
 	const existingMerchantShopcategories =
 		MerchantShopCategory && (await MerchantShopCategory.findAll());
 	if (existingMerchantShopcategories.length > 0) return;
+
+	console.log("MarketShopCategoryData", MarketShopCategoryData);
+
 	await MerchantShopCategory.bulkCreate(MarketShopCategoryData, {
 		returning: true,
 	});

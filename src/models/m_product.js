@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			slug: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 			name: {
 				type: DataTypes.STRING,
@@ -32,11 +32,17 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+			merchantShopCategoryUuid: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
 			categoryUuid: {
+				// this is productCategory
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
 			subCategoryUuid: {
+				// this is subproductCategory
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
@@ -48,5 +54,3 @@ module.exports = (sequelize, DataTypes) => {
 
 	return Product;
 };
-
-

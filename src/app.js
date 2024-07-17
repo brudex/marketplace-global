@@ -14,7 +14,8 @@ const config = require("./config/config");
 const routes = require("./routes");
 const appLocalsData = require("./app.locals.data");
 const app = express();
-
+const db = require("./models");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 initializePassport(passport);
 // view engine setup
@@ -30,32 +31,35 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 //passport config
 app.use(
 	session({
-		cookie: { maxAge: 86400000 },
-		store: new MemoryStore({
-			checkPeriod: 86400000, // prune expired entries every 24h
-		}),
 		secret: config.jwt_secret,
 		resave: false,
 		saveUninitialized: false,
+		store: new SequelizeStore({
+			db: db.sequelize,
+			tableName: "sessions", // Name of the table to store sessions
+		}),
 	})
 );
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use((req, res, next) => {
 	res.locals.user = req.user;
+
+	console.log("req.user", req.user);
 	res.locals.activePageClass = (route) => {
-		if(req.path.indexOf(route.toLowerCase())  > -1){
-			return 'activeLink';
+		if (req.path.indexOf(route.toLowerCase()) > -1) {
+			return "activeLink";
 		}
-		return ''
-	}
+		return "";
+	};
 	populateLocals(res);
 	next();
 });
 function populateLocals(res) {
 	const locals = appLocalsData.getLocalsData();
-	console.log("locals>>", locals);
+	// console.log("locals>>", locals);
 	assignLocals(res, locals);
 }
 
@@ -66,10 +70,10 @@ setTimeout(function () {
 	});
 }, 1000);
 
-
 function assignLocals(res, appLocals) {
 	res.locals.categories = appLocals.categories;
 	res.locals.zones = appLocals.zones;
+	res.locals.user = res.locals.user;
 }
 // Configure Multer for file uploads
 app.use("/", routes);
@@ -78,12 +82,6 @@ app.use(function (req, res, next) {
 	if (/\/api/.test(req.path)) return next(createError(404));
 	res.render("errors/404", { title: "404", layout: "blank-layout" });
 });
-
-
-
-
-
-
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -99,16 +97,15 @@ app.use(function (err, req, res, next) {
 		return err.status
 			? res.json(err)
 			: res.json({
-				status_code: "500",
-				message: "Something went wrong",
-				reason: "An Internal server erorr occurred",
-			});
+					status_code: "500",
+					message: "Something went wrong",
+					reason: "An Internal server erorr occurred",
+			  });
 	}
 	res.render(`errors/${err.status || 500}`, {
 		title: err.status || 500,
 		layout: "layout/blank-layout",
 	});
 });
-
 
 module.exports = app;

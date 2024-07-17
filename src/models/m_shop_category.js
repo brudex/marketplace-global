@@ -4,10 +4,10 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			uuid: {
 				type: DataTypes.STRING,
-				primaryKey: false,
+				primaryKey: true,
 				allowNull: false,
 			},
-			merchantShopUuid: DataTypes.STRING,
+			// merchantShopUuid: DataTypes.STRING, use to be like this
 			zoneUuid: DataTypes.STRING,
 			name: DataTypes.STRING,
 			description: DataTypes.STRING,
