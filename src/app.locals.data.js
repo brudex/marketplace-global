@@ -21,7 +21,6 @@ function fetchZones() {
 async function populateAppLocals(callback) {
 	// fetchCategories();
 	// fetchZones();
-
 	await Promise.all([fetchCategories(), fetchZones()]).then((data) => {
 		console.log("data Promise", data);
 	});
