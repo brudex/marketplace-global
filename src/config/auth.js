@@ -12,12 +12,12 @@ const isNotAuthenticated = (req, res, next) => {
 };
 
 const authenticateLogin = passport.authenticate("local-login", {
-	successRedirect: "/auth", // ADD rota de successo no login
+	successRedirect: "/", // ADD rota de successo no login
 	failureRedirect: "/login", // ADD rota de falha no login
 });
 
 const authenticateRegister = passport.authenticate("local-register", {
-	successRedirect: "/auth", // ADD rota de successo no register
+	successRedirect: "/", // ADD rota de successo no register
 	failureRedirect: "/register", // ADD rota de falha no register
 });
 

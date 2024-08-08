@@ -3,12 +3,16 @@ const router = express.Router();
 const MarketZoneController = require("../controllers/MarketZoneController");
 const { isAuthenticated } = require("../config/auth");
 
-
 // Rotas Get
 
 router.post("/create", MarketZoneController.createMarketZone);
 router.get("/getzones", MarketZoneController.getAllZones);
 router.get("/zones/:id", MarketZoneController.renderZoneById);
+
+router.get(
+	"/zones/merchantcategory/:id",
+	MarketZoneController.getPageByMerchantId
+);
 
 // router.get("/", MarketZoneController.getIndex);
 // router.get("/about", UserController.getAbout);

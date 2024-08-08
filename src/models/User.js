@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
 					notEmpty: { msg: "" }, // ADD mensagem de erro
 				},
 			},
+			isAdmin: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+			},
 		},
 		{
 			sequelize,

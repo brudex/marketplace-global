@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+			merchantShopCategoryUuid: DataTypes.STRING,
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,

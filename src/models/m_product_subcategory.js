@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			//zoneUuid: DataTypes.STRING,
-			categoryUuid: DataTypes.STRING,
+			productCategoryUuid: DataTypes.STRING,
+
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,

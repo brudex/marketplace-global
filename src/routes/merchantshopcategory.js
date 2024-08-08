@@ -10,7 +10,10 @@ router.post(
 	MerchantShopCategoryController.createMerchantShopCategory
 );
 
-// router.get("/", MarketZoneController.getIndex);
+router.get(
+	"/:zoneuuid",
+	MerchantShopCategoryController.getMerchantShopByZoneId
+);
 // router.get("/about", UserController.getAbout);
 // router.get("/contact", UserController.getContact);
 
