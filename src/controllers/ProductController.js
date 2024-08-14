@@ -1,5 +1,11 @@
 const db = require("../models");
-const { Product, ProductImages } = db.sequelize.models;
+const {
+	Product,
+	ProductImages,
+	ProductCategory,
+	MerchantShopCategory,
+	ProductSubcategory,
+} = db.sequelize.models;
 const { v4: uuidv4 } = require("uuid");
 const { z } = require("zod");
 const ProductController = {
@@ -171,10 +177,10 @@ const ProductController = {
 						price=:price,
 						quantity=:quantity,
 						zone_uuid=:zoneUuid,
-						merchant_shop_category_uuid=:merchantShopCategoryUuid, 
-						category_uuid=:categoryUuid, 
+						merchant_shop_category_uuid=:merchantShopCategoryUuid,
+						category_uuid=:categoryUuid,
 						sub_category_uuid=:subCategoryUuid
-	
+
 					WHERE
 						uuid = :uuid
 					`;
@@ -295,6 +301,44 @@ const ProductController = {
 				message: error.message,
 			});
 		}
+	},
+
+	async getProduct(req, res) {
+		const productParamSchema = z.object({
+			id: z.string().min(4),
+		});
+
+		const validateParams = productParamSchema.parse(req.params);
+
+		if (!validateParams.success) {
+			return res.render("errors/404", {
+				title: "Ad not found",
+				layout: "layout/index",
+			});
+		}
+
+		const product = await Product.findOne({
+			where: { uuid: req.params.id },
+			raw: true,
+		});
+		product.category = await ProductCategory.findOne({
+			where: { uuid: product.categoryUuid },
+		});
+
+		product.subcategory = await ProductSubcategory.findOne({
+			where: { uuid: product.subCategoryUuid },
+		});
+
+		product.merchantShopCategory = await MerchantShopCategory.findOne({
+			where: { uuid: product.merchantShopCategoryUuid },
+		});
+
+		res.render("page/singleproductpage", {
+			title: product.name,
+			// layout: "layout/profile-layout",
+			data: { product: product },
+		});
+		// res.render("page/home", { session: false });
 	},
 };
 

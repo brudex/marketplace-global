@@ -33,7 +33,7 @@ const ProductSubCategoryController = {
 		console.log("req parmas", req.params);
 
 		const findShop = await ProductSubcategory.findAll({
-			where: { categoryUuid: req.params.productId },
+			where: { productCategoryUuid: req.params.productId },
 			raw: true,
 		});
 

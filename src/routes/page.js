@@ -11,6 +11,7 @@ const {
 } = require("../config/auth");
 const MarketZoneController = require("../controllers/MarketZoneController");
 const MerchantShopCategoryController = require("../controllers/MerchantShopCategoryController");
+const ProductController = require("../controllers/ProductController");
 
 // Rotas Get
 router.get("/", UserController.getIndex);
@@ -50,6 +51,8 @@ router.use(function (req, res, next) {
 	res.locals.currentUser = req.user;
 	next();
 });
+
+router.get("/product/:productuuid", ProductController.getProduct);
 
 // let info = [];
 // const data = appLocalsData.populateAppLocals(function (appLocals) {
