@@ -41,7 +41,7 @@
 
 
 
-										<div class="col-lg-12">
+										<!-- <div class="col-lg-12">
 											<div class="form-group">
 												<label class="form-label"><span class="chg_ps">Market Zone</label>
 												<select class="js-example-basic-single form-control custom-select" name="zoneUuid"
@@ -53,8 +53,22 @@
 
 												</select>
 											</div>
-										</div>
+										</div> -->
 
+										<div class="col-lg-12">
+											<div class="form-group">
+												<label class="form-label"><span class="chg_ps">Merchant Shop</label>
+												<select class="js-example-basic-single form-control custom-select" name="merchantShopUuid"
+													id="merchantShopUuid" required>
+													<option>Choose an option</option>
+													<%data.merchantShops.forEach(data => { %>
+													<option value="<%=data.uuid%>" data-name="<%=data.zoneUuid%>"><%=data.shopName%></option>
+													<% }); %>
+
+												</select>
+											</div>
+										</div>
+										<!--
 										<div class="col-lg-12">
 											<div class="form-group">
 												<label class="form-label"> Merchant Category</label>
@@ -64,7 +78,7 @@
 
 												</select>
 											</div>
-										</div>
+										</div> -->
 
 										<div class="col-lg-12">
 											<div class="form-group">
@@ -173,7 +187,7 @@
 
 				console.log("data", data)
 				const secondSelect = document.getElementById('merchantCategory');
-				secondSelect.innerHTML = '<option value="">Select an option</option>';
+				// secondSelect.innerHTML = '<option value="">Select an option</option>';
 
 				// Populate the second select with new options
 				data.data.forEach(item => {
@@ -258,16 +272,35 @@
 			});
 	}
 	$(document).ready(function () {
+		$('.js-example-basic-single').select2();
 
-		$("#marketZone").change(() => {
-			const zoneUUid = $('#marketZone option:selected').val();
 
-			Promise.allSettled([getMerchantShopByZoneId(zoneUUid), getProductCategoryZoneId(zoneUUid)]).then((
+		// $("#marketZone").change(() => {
+		// 	const zoneUUid = $('#marketZone option:selected').val();
+
+		// 	Promise.allSettled([getMerchantShopByZoneId(zoneUUid), getProductCategoryZoneId(zoneUUid)]).then((
+		// 		data) => {
+		// 		console.log("")
+		// 	})
+
+		// })
+
+		$("#merchantShopUuid").change(() => {
+			//	const zoneUUid = $('#merchantShopUuid option:selected').val();
+			//	const productFetch = $('#merchantShopUuid').data('name');
+
+
+			const zoneUUid = $('#merchantShopUuid option:selected').data('name');
+			//alert("zoneUUid", zoneUUid)
+			console.log("zoneUUid", zoneUUid)
+
+			Promise.allSettled([getProductCategoryZoneId(zoneUUid)]).then((
 				data) => {
 				console.log("")
 			})
 
 		})
+
 
 		$("#productCategory").change(() => {
 			const productCategoryId = $('#productCategory option:selected').val();

@@ -79,37 +79,49 @@ const products = async (req, res) => {
 			});
 			product.productFiles = productFiles;
 			// get Zone
-			const zone = await MarketZones.findOne({
-				where: { zoneUuid: product.zoneUuid },
-			});
-			product.zone = zone;
+			// const zone = await MarketZones.findOne({
+			// 	where: { zoneUuid: product.zoneUuid },
+			// });
+			// product.zone = zone;
 
 			// get Product Category
 			const productCategory = await ProductCategory.findOne({
 				where: { uuid: product.categoryUuid },
+				raw: true,
 			});
 			product.productCategory = productCategory;
 			/// Get Product Sub Category
 			const productSubCategory = await ProductSubcategory.findOne({
 				where: { uuid: product.subCategoryUuid },
+				raw: true,
 			});
 			product.productSubCategory = productSubCategory;
 
 			// Get Merchant category
 
-			const merchantShopCategory = await MerchantShopCategory.findOne({
-				where: { uuid: product.merchantShopCategoryUuid },
+			// const merchantShopCategory = await MerchantShopCategory.findOne({
+			// 	where: { uuid: product.merchantShopCategoryUuid },
+			// });
+			// product.merchantShopCategory = merchantShopCategory;
+
+			// Get Merchant Shop
+
+			const merchantShop = await MerchantShop.findOne({
+				where: { uuid: product.merchantShopUuid },
+				raw: true,
 			});
-			product.merchantShopCategory = merchantShopCategory;
+			product.merchantShop = merchantShop;
 			product.createdAt = format(product.createdAt, "do MMMM, yyyy");
 		}
 
+		console.log("products>>>", products);
 		res.render("page/admin/ads", {
 			title: "Products",
 			layout: "layout/admin-layout",
 			products: products,
 		});
 	} catch (error) {
+		console.log("error", error);
 		res.render("errors/404", {
 			title: "Ads",
 			layout: "layout/index",
@@ -122,6 +134,7 @@ const getProductsById = async (req, res) => {
 		const product = await Product.findByPk(req.params.uuid, {
 			raw: true,
 		});
+		const merchantShops = await MerchantShop.findAll({ raw: true });
 		if (!product) {
 			return res.redirect("/ads");
 		}
@@ -131,10 +144,10 @@ const getProductsById = async (req, res) => {
 		});
 		product.productFiles = productFiles;
 		// get Zone
-		const zone = await MarketZones.findOne({
-			where: { zoneUuid: product.zoneUuid },
-		});
-		product.zone = zone;
+		// const zone = await MarketZones.findOne({
+		// 	where: { zoneUuid: product.zoneUuid },
+		// });
+		// product.zone = zone;
 
 		// get Product Category
 		const productCategory = await ProductCategory.findOne({
@@ -149,10 +162,15 @@ const getProductsById = async (req, res) => {
 
 		// Get Merchant category
 
-		const merchantShopCategory = await MerchantShopCategory.findOne({
-			where: { uuid: product.merchantShopCategoryUuid },
+		// const merchantShopCategory = await MerchantShopCategory.findOne({
+		// 	where: { uuid: product.merchantShopCategoryUuid },
+		// });
+		// product.merchantShopCategory = merchantShopCategory;
+
+		const merchantShop = await MerchantShop.findOne({
+			where: { uuid: product.merchantShopUuid },
 		});
-		product.merchantShopCategory = merchantShopCategory;
+		product.merchantShop = merchantShop;
 
 		const marketZones = await MarketZones.findAll({ raw: true });
 
@@ -162,9 +180,11 @@ const getProductsById = async (req, res) => {
 			product: product,
 			data: {
 				zones: marketZones,
+				merchantShops,
 			},
 		});
 	} catch (error) {
+		console.log("error", error);
 		res.render("errors/404", {
 			title: "Ads",
 			layout: "layout/index",
@@ -174,13 +194,16 @@ const getProductsById = async (req, res) => {
 
 const renderAddProduct = async (req, res) => {
 	const marketZones = await MarketZones.findAll({ raw: true });
-
+	const merchantShops = await MerchantShop.findAll({ raw: true });
 	console.log("marketZones>>", marketZones);
+	// const productCategory = await ProductCategory.findAll({ raw: true });
+
 	res.render("page/admin/add-product", {
 		title: "Products",
 		layout: "layout/admin-layout",
 		data: {
 			zones: marketZones,
+			merchantShops,
 		},
 	});
 };

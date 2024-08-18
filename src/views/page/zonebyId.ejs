@@ -108,12 +108,18 @@
 						</div>
 					</nav>
 					<div class="product-wrapper row cols-md-3 cols-2">
+
+
+						<% products.forEach(data => { %>
+
 						<div class="product-wrap">
 							<div class="product text-center">
 								<figure class="product-media">
-									<a href="product-default.html">
-										<img src="/assets/images/demos/demo2/products/1-1-1.jpg" alt="Product" width="300" height="338">
-										<img src="/assets/images/demos/demo2/products/1-1-2.jpg" alt="Product" width="300" height="338">
+									<a href="/product/<%-data.uuid%>">
+										<% data.images.forEach(dataImages => { %>
+										<img src="<%-dataImages.imageUrl ? '/uploads/' +dataImages.imageUrl :'/upload/package.png' %>"
+											alt="Product" width="300" height="338">
+										<% }); %>
 									</a>
 									<div class="product-action-vertical">
 										<a href="#" class="btn-product-icon btn-cart w-icon-cart" title="Add to cart"></a>
@@ -125,22 +131,22 @@
 										<label class="product-label label-hot">Hot</label>
 									</div>
 								</figure>
-								<div class="product-details">
-									<h4 class="product-name"><a href="product-default.html">Women's Comforter</a></h4>
+								<div class="product-details" style="">
+									<h4 class="product-name"><a href="/product/<%-data.uuid%>"><%-data.name%></a></h4>
 									<div class="ratings-container">
 										<div class="ratings-full">
 											<span class="ratings" style="width: 100%;"></span>
 											<span class="tooltiptext tooltip-top"></span>
 										</div>
-										<a href="product-default.html" class="rating-reviews">(3 Reviews)</a>
+										<a href="#" class="rating-reviews">(3 Reviews)</a>
 									</div>
 									<div class="product-price">
-										<ins class="new-price">$45.62 - $58.28</ins>
+										<ins class="new-price">GHS <%-data.price%></ins>
 									</div>
 								</div>
 							</div>
 						</div>
-
+						<% }); %>
 					</div>
 
 					<div class="toolbox toolbox-pagination justify-content-between">
