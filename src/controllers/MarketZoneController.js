@@ -68,6 +68,7 @@ const MarketZoneController = {
 			where: { zoneUuid: id },
 		});
 
+		console.log("merchantShop>>>", merchantShop);
 		const allMerchantShopMatchingZoneId = merchantShop
 			.map((r) => `'${r.uuid}'`)
 			.join(",");
@@ -100,17 +101,34 @@ const MarketZoneController = {
 		// 	}
 		// );
 
-		const products = await db.sequelize.query(
-			`SELECT *
-		 FROM
-			"Product"
-		 WHERE
-			"merchant_shop_uuid" in(${allMerchantShopMatchingZoneId})`,
-			{
-				type: QueryTypes.SELECT,
-				raw: true,
-			}
-		);
+		console.log("allMerchantShopMatchingZoneId", allMerchantShopMatchingZoneId);
+		let products;
+		if (allMerchantShopMatchingZoneId.length > 0) {
+			products = await db.sequelize.query(
+				`SELECT *
+			 FROM
+				"Product"
+			 WHERE
+				"merchant_shop_uuid" in(${allMerchantShopMatchingZoneId})`,
+				{
+					type: QueryTypes.SELECT,
+					raw: true,
+				}
+			);
+		} else {
+			products = await db.sequelize.query(
+				`SELECT *
+			 FROM
+				"Product"
+			 WHERE
+			1=0`,
+				{
+					type: QueryTypes.SELECT,
+					raw: true,
+				}
+			);
+		}
+
 		console.log("products>>", products);
 		// add Images
 		const productsWithImages = await Promise.all(
