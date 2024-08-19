@@ -65,12 +65,12 @@ const MerchantShopController = {
 					SET
 						shop_name = :name,
 						description = :description,
-						
+
 						zone_uuid=:zoneUuid,
-						merchant_shop_category_uuid=:merchantShopCategoryUuid, 
-						merchant_uuid=:merchantUuid, 
+						merchant_shop_category_uuid=:merchantShopCategoryUuid,
+						merchant_uuid=:merchantUuid,
 						image_url=:image_url
-	
+
 					WHERE
 						uuid = :uuid
 					`;
@@ -123,10 +123,17 @@ const MerchantShopController = {
 				where: { uuid: req.params.id },
 			});
 
-			if (!existingShop) {
+			if (!existingShop.dataValues?.uuid) {
 				return res
 					.status(400)
 					.json({ error: "Merchant shop with id provided does not exist" });
+			}
+
+			if (!existingShop.merchantUuid == req.user.uuid) {
+				res.status(403).json({
+					status: "error",
+					message: "Forbidden",
+				});
 			}
 
 			await existingShop.destroy();

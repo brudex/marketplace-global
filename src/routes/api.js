@@ -88,6 +88,11 @@ router.delete(
 	MerchantShopController.deleteMerchantShopById
 );
 
+router.delete(
+	"/merchantshop/merchant/:id",
+	MerchantShopController.deleteMerchantShopById
+);
+
 router.post(
 	"/merchantshopcategory/create",
 	uploadFileMerchantShop,

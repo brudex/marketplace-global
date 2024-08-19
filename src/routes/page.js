@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/UserController");
 const HomePageController = require("../controllers/HomePageController");
+const AccountPageController = require("../controllers/AccountPageController");
 
 const {
 	isAuthenticated,
@@ -11,6 +12,7 @@ const {
 } = require("../config/auth");
 const MarketZoneController = require("../controllers/MarketZoneController");
 const MerchantShopCategoryController = require("../controllers/MerchantShopCategoryController");
+const ProductController = require("../controllers/ProductController");
 
 // Rotas Get
 router.get("/", UserController.getIndex);
@@ -28,7 +30,6 @@ router.get("/auth", isAuthenticated, UserController.getAuth);
 // Rotas Post
 router.post("/register", authenticateRegister);
 router.post("/login", authenticateLogin);
-router.get("/account", HomePageController.getHomePage);
 
 router.get("/marketzone/zones/:id", MarketZoneController.renderZoneById);
 
@@ -50,6 +51,26 @@ router.use(function (req, res, next) {
 	res.locals.currentUser = req.user;
 	next();
 });
+
+router.get("/product/:productuuid", ProductController.getProduct);
+
+// Account
+router.get("/account", AccountPageController.getHomePage);
+router.get("/account/createshop", AccountPageController.renderAddMerchantShop);
+
+router.get("/account/shops", AccountPageController.getMerchantshops);
+
+router.get(
+	"/account/shop/edit/:uuid",
+	AccountPageController.getMerchantShoptById
+);
+
+router.get("/account/products", AccountPageController.getProducts);
+router.get("/account/createproduct", AccountPageController.renderAddProduct);
+router.get(
+	"/account/product/edit/:uuid",
+	AccountPageController.getProductsById
+);
 
 // let info = [];
 // const data = appLocalsData.populateAppLocals(function (appLocals) {

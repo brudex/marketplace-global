@@ -10,7 +10,13 @@
 
 	<main>
 		<div class="container">
-			<%- body %>
+			<div class="tab tab-vertical row gutter-lg">
+				<%- include('_partials/_account_sidebar.ejs'); %>
+				<div class="tab-content mb-6">
+					<%- body %>
+				</div>
+
+			</div>
 		</div>
 	</main>
 
@@ -34,6 +40,23 @@
 
 	<!-- Main JS -->
 	<script src="/assets/js/main.min.js"></script>
+
+
+	<script src="/admin/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="/admin/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="/admin/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="/admin/pages/data-table/js/jszip.min.js"></script>
+	<script src="/admin/pages/data-table/js/pdfmake.min.js"></script>
+	<script src="/admin/pages/data-table/js/vfs_fonts.js"></script>
+	<script src="/admin/pages/data-table/extensions/responsive/js/dataTables.responsive.min.js"></script>
+	<script src="/admin/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+	<script src="/admin/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+	<script src="/admin/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="/admin/vendor/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+	<script type="text/javascript" src="/admin/vendor/popper.js/js/popper.min.js"></script>
+	<script type="text/javascript" src="/admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/iziToast.min.js"></script>
+	<script src="/assets/js/select2.min.js"></script>
 
 </body>
 </html>

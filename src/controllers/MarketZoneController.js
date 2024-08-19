@@ -63,6 +63,15 @@ const MarketZoneController = {
 		console.log("result>>", result);
 		res.locals.categories = result;
 
+		// GET ALL SHOPS
+		const merchantShop = await MerchantShop.findAll({
+			where: { zoneUuid: id },
+		});
+
+		const allMerchantShopMatchingZoneId = merchantShop
+			.map((r) => `'${r.uuid}'`)
+			.join(",");
+
 		/// GET ALL PRODUCTS BASED ON ZONES
 
 		// const products = await sequelize.query(
@@ -92,11 +101,11 @@ const MarketZoneController = {
 		// );
 
 		const products = await db.sequelize.query(
-			`SELECT *  
-		 FROM 
-			"Product" 
-		 WHERE 
-			"zone_uuid" ='${findByUUID.zoneUuid}'`,
+			`SELECT *
+		 FROM
+			"Product"
+		 WHERE
+			"merchant_shop_uuid" in(${allMerchantShopMatchingZoneId})`,
 			{
 				type: QueryTypes.SELECT,
 				raw: true,
@@ -153,10 +162,10 @@ const MarketZoneController = {
 		res.locals.categories = result;
 
 		const products = await db.sequelize.query(
-			`SELECT *  
-		 FROM 
-			"Product" 
-		 WHERE 
+			`SELECT *
+		 FROM
+			"Product"
+		 WHERE
 			"merchant_shop_category_uuid" ='${id}'`,
 			{
 				type: QueryTypes.SELECT,

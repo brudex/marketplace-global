@@ -28,11 +28,16 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			zoneUuid: {
-				type: DataTypes.STRING,
-				allowNull: false,
-			},
-			merchantShopCategoryUuid: {
+			// zoneUuid: {
+			// 	type: DataTypes.STRING,
+			// 	allowNull: false,
+			// },
+			// merchantShopCategoryUuid: {
+			// 	type: DataTypes.STRING,
+			// 	allowNull: false,
+			// },
+
+			merchantShopUuid: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},

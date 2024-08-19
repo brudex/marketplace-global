@@ -47,7 +47,6 @@ app.use(passport.session());
 app.use((req, res, next) => {
 	res.locals.user = req.user;
 
-	console.log("req.user", req.user);
 	res.locals.activePageClass = (route) => {
 		if (req.path.indexOf(route.toLowerCase()) > -1) {
 			return "activeLink";

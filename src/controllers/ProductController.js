@@ -1,5 +1,11 @@
 const db = require("../models");
-const { Product, ProductImages } = db.sequelize.models;
+const {
+	Product,
+	ProductImages,
+	ProductCategory,
+	MerchantShopCategory,
+	ProductSubcategory,
+} = db.sequelize.models;
 const { v4: uuidv4 } = require("uuid");
 const { z } = require("zod");
 const ProductController = {
@@ -21,10 +27,10 @@ const ProductController = {
 			quantity: z.string({
 				message: "Quantity must be a non-negative integer",
 			}),
-			zoneUuid: z
-				.string({ message: "Market zone is required" })
-				.uuid({ message: "Market zone is required" }),
-			merchantShopCategoryUuid: z
+			// zoneUuid: z
+			// 	.string({ message: "Market zone is required" })
+			// 	.uuid({ message: "Market zone is required" }),
+			merchantShopUuid: z
 				.string({ message: "Merchant shop is required" })
 				.uuid(),
 			categoryUuid: z
@@ -50,10 +56,10 @@ const ProductController = {
 			return res.status(400).json({ message: errorMsg[0], status: "failed" });
 		}
 
-		const { name, zoneUuid, merchantShopCategoryUuid } = req.body;
+		const { name, merchantShopUuid } = req.body;
 
 		const findProductCategory = await Product.findOne({
-			where: { name, zoneUuid, merchantShopCategoryUuid },
+			where: { name, merchantShopUuid },
 		});
 
 		if (findProductCategory) {
@@ -128,10 +134,10 @@ const ProductController = {
 			quantity: z.string({
 				message: "Quantity must be a non-negative integer",
 			}),
-			zoneUuid: z
-				.string({ message: "Market zone is required" })
-				.uuid({ message: "Market zone is required" }),
-			merchantShopCategoryUuid: z
+			// zoneUuid: z
+			// 	.string({ message: "Market zone is required" })
+			// 	.uuid({ message: "Market zone is required" }),
+			merchantShopUuid: z
 				.string({ message: "Merchant shop is required" })
 				.uuid(),
 			categoryUuid: z
@@ -170,11 +176,10 @@ const ProductController = {
 						description = :description,
 						price=:price,
 						quantity=:quantity,
-						zone_uuid=:zoneUuid,
-						merchant_shop_category_uuid=:merchantShopCategoryUuid, 
-						category_uuid=:categoryUuid, 
+						merchant_shop_uuid=:merchantShopUuid,
+						category_uuid=:categoryUuid,
 						sub_category_uuid=:subCategoryUuid
-	
+
 					WHERE
 						uuid = :uuid
 					`;
@@ -185,8 +190,7 @@ const ProductController = {
 						description: req.body.description,
 						price: req.body.price,
 						quantity: req.body.quantity,
-						zoneUuid: req.body.zoneUuid,
-						merchantShopCategoryUuid: req.body.merchantShopCategoryUuid,
+						merchantShopUuid: req.body.merchantShopUuid,
 						categoryUuid: req.body.categoryUuid,
 						subCategoryUuid: req.body.subCategoryUuid,
 					},
@@ -295,6 +299,48 @@ const ProductController = {
 				message: error.message,
 			});
 		}
+	},
+
+	async getProduct(req, res) {
+		if (!req.params.productuuid) {
+			return res.render("errors/404", {
+				title: "Ad not found",
+				layout: "layout/index",
+			});
+		}
+
+		const product = await Product.findOne({
+			where: { uuid: req.params.productuuid },
+			raw: true,
+		});
+		product.category = await ProductCategory.findOne({
+			where: { uuid: product.categoryUuid },
+			raw: true,
+		});
+
+		product.subcategory = await ProductSubcategory.findOne({
+			where: { uuid: product.subCategoryUuid },
+			raw: true,
+		});
+
+		product.merchantShopCategory = await MerchantShopCategory.findOne({
+			where: { uuid: product.merchantShopCategoryUuid },
+			raw: true,
+		});
+
+		product.productImages = await ProductImages.findAll({
+			where: { productUuid: product.uuid },
+			raw: true,
+		});
+
+		console.log("product>>", product);
+
+		res.render("page/singleproductpage", {
+			title: product.name,
+			layout: "layout/zonebyid",
+			product,
+		});
+		// res.render("page/home", { session: false });
 	},
 };
 
