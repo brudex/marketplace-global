@@ -118,7 +118,7 @@
 									<a href="/product/<%-data.uuid%>">
 										<% data.images.forEach(dataImages => { %>
 										<img src="<%-dataImages.imageUrl ? '/uploads/' +dataImages.imageUrl :'/upload/package.png' %>"
-											alt="Product" width="300" height="338">
+											alt="Product" width="300" height="338" style="height:300px;width:100%;object-fit: cover;">
 										<% }); %>
 									</a>
 									<div class="product-action-vertical">
