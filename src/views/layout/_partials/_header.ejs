@@ -9,17 +9,15 @@
 
 
 				<%if(user){%>
-				<a href="/account" class="d-lg-show">My Account</a>
-
-				<a href="/#" class="ml-4 d-lg-show login register"><%-user.email%></a>
+					<a href="/account" class="d-lg-show">My Account</a>
+					<a href="/" class="ml-4 d-lg-show login register"><%-user.fullName%></a>
+					<a href="/auth/logout" class="ml-4 d-lg-show login register">Logout</a>
 				<%}else{%>
-				<a href="my-account.html" class="d-lg-show">My Account</a>
-
-				<a href="/login" class="d-lg-show login sign-in"><i class="w-icon-account"></i>Sign In</a>
+ 
+				<a href="/auth/user/login" class="d-lg-show login sign-in"><i class="w-icon-account"></i>Sign In</a>
 				<span class="delimiter d-lg-show">/</span>
-				<a href="/register" class="ml-0 d-lg-show login register">Register</a>
+				<a href="/auth/user/register" class="ml-0 d-lg-show login register">Register</a>
 				<%}%>
-
 
 			</div>
 		</div>
@@ -109,12 +107,10 @@
 							</button>
 						</div>
 					</div>
-
 					<div class="cart-total">
 						<label>Subtotal:</label>
 						<span class="price">$58.67</span>
 					</div>
-
 					<div class="cart-action">
 						<a href="cart.html" class="btn btn-dark btn-outline btn-rounded">View Cart</a>
 						<a href="checkout.html" class="btn btn-primary  btn-rounded">Checkout</a>

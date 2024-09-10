@@ -2,23 +2,7 @@ const { User } = require("../models");
 // import AppGlobalData from "../app.global.data";
 
 // Rotas GET
-const getLogin = (req, res) => {
-	//res.render("page/login", { session: false, layout: "login" });
-	// res.locals.zones = AppGlobalData.zones;
-	// res.render("page/auth", { title: "Login Page", layout: "layout/auth" });
-	res.render("page/login", {
-		title: "Login Page",
-		layout: "layout/auth",
-	});
-};
 
-const getRegister = (req, res) => {
-	//res.locals.zones = AppGlobalData.zones;
-	res.render("page/register", {
-		title: "Login Page",
-		layout: "layout/auth",
-	});
-};
 
 const getIndex = async (req, res) => {
 	//res.locals.user = { name: "John", email: "john@example.com" };
@@ -49,8 +33,6 @@ const getLogout = (req, res) => {
 };
 
 module.exports = {
-	getLogin,
-	getRegister,
 	getIndex,
 	getAbout,
 	getContact,

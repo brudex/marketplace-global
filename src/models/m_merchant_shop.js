@@ -2,13 +2,7 @@ module.exports = (sequelize, DataTypes) => {
 	const MerchantShop = sequelize.define(
 		"MerchantShop",
 		{
-			// uuid: {
-			// 	type: DataTypes.STRING,
-
-			// 	primaryKey: true,
-			// 	allowNull: false,
-			// },
-
+			 
 			uuid: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -16,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			shopName: DataTypes.STRING,
 			description: DataTypes.STRING,
-			zoneUuid: DataTypes.UUID,
+			zoneUuid: DataTypes.STRING,
 			merchantShopCategoryUuid: DataTypes.STRING, /// added newly
-			merchantUuid: DataTypes.UUID,
+			merchantUuid: DataTypes.STRING,
 			imageUrl: {
 				type: DataTypes.STRING,
 				allowNull: true,

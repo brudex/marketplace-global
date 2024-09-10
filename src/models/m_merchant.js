@@ -1,16 +1,14 @@
 const crypto = require("crypto");
 const { v4: uuidv4 } = require("uuid");
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
 	const Merchant = sequelize.define(
 		"Merchant",
 		{
-			// uuid: {
-			// 	type: DataTypes.STRING,
-			// 	primaryKey: true,
-			// 	allowNull: false,
-			// },
+			 
 			uuid: {
-				type: DataTypes.UUID,
+				type: DataTypes.STRING,
 				defaultValue: DataTypes.UUIDV4,
 				allowNull: false,
 				primaryKey: true,
@@ -22,19 +20,11 @@ module.exports = (sequelize, DataTypes) => {
 			email: DataTypes.STRING,
 			password: {
 				type: DataTypes.STRING,
-				validate: {
-					notEmpty: { msg: "" }, // ADD mensagem de erro
-				},
+				 
 			},
 			isAdmin: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,
-			},
-			password_key: {
-				type: DataTypes.STRING,
-				validate: {
-					notEmpty: { msg: "" }, // ADD mensagem de erro
-				},
 			},
 			phoneNumber: DataTypes.STRING,
 			idCardNumber: DataTypes.STRING,
@@ -42,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: true,
 			},
+			resetPasswordToken: DataTypes.STRING,
+			resetPasswordExpires: DataTypes.DATE,
 		},
 		{
 			tableName: "Merchant",
@@ -49,19 +41,12 @@ module.exports = (sequelize, DataTypes) => {
 	);
 
 	Merchant.beforeCreate(async (user, options) => {
-		const saltHash = await crypto.randomBytes(32).toString();
-		const hashPassword = await crypto
-			.pbkdf2Sync(user.password, saltHash, 10000, 64, "sha512")
-			.toString("hex");
-		user.password = hashPassword;
-		user.password_key = saltHash;
+		user.password = await bcrypt.hash(user.password, 10);
+		
 	});
 
 	Merchant.comparePassword = async (password, user) => {
-		const hashVerify = await crypto
-			.pbkdf2Sync(password, user.password_key, 10000, 64, "sha512")
-			.toString("hex");
-		return user.password_hash === hashVerify;
+		return await bcrypt.compare(password, user.password);
 	};
 
 	return Merchant;

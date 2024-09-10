@@ -103,6 +103,7 @@ app.use(function (err, req, res, next) {
 	}
 	res.render(`errors/${err.status || 500}`, {
 		title: err.status || 500,
+		error: err,
 		layout: "layout/blank-layout",
 	});
 });

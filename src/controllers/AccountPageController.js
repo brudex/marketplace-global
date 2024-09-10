@@ -54,30 +54,24 @@ const getMerchantshops = async (req, res) => {
 		for (let i = 0; i < m_shops.length; i++) {
 			const mshop = m_shops[i];
 			console.log("mshopa", mshop);
-
 			const mshopCat = await MerchantShopCategory.findOne({
 				raw: true,
 				where: { uuid: mshop.merchantShopCategoryUuid },
 			});
 			console.log("mshopCat", mshopCat);
 			mshop.merchantShopCategory = mshopCat;
-
 			// get  Merchant
 			const merchant = await Merchant.findOne({
 				raw: true,
 				where: { uuid: mshop.merchantUuid },
 			});
 			mshop.merchant = merchant;
-
 			// get Zone
-
 			const zone = await MarketZones.findOne({
 				raw: true,
 				where: { zoneUuid: mshop.zoneUuid },
 			});
-
 			mshop.zone = zone;
-
 			mshop.createdAt = format(mshop.createdAt, "do MMMM, yyyy");
 		}
 
@@ -318,10 +312,7 @@ const getMerchantShoptById = async (req, res) => {
 	}
 };
 
-// export default {
-// 	getHomePage,
-// };
-
+ 
 module.exports = {
 	getHomePage,
 	renderAddMerchantShop,

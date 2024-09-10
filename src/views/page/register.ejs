@@ -14,7 +14,13 @@
 				<div class="tab tab-nav-boxed tab-nav-center tab-nav-underline">
 					<div class="tab-content">
 						<div class="tab-pane active" id="sign-up">
-							<form action="/register" method="POST">
+							<!-- Add error message display -->
+							<% if (error) { %>
+								<div class="alert alert-danger" role="alert">
+									<%= error %>
+								</div>
+							<% } %>
+							<form action="/auth/user/register" method="POST">
 
 								<div class="form-group mb-5">
 									<label>First Name *</label>
@@ -48,27 +54,16 @@
 
 								<div id="sellerDiv" style="display: none;">
 
-
-									<!-- <div class="form-group mb-5">
-										<label>Shop Name *</label>
-										<input type="text" class="form-control" name="shop-name" id="shop-name">
-									</div> -->
-
+ 
 									<div class="form-group mb-5">
 										<label>Phone Number *</label>
 										<input type="text" class="form-control" name="phoneNumber" id="phoneNumber">
 									</div>
 
 								</div>
-								<div class="form-checkbox user-checkbox mt-0">
-									<input type="radio" id="check-customer" checked name="type" value="customer" required>
-									<label for="check-customer" class="check-customer mb-1">I am a customer</label>
-									<br>
-									<input type="radio" id="check-seller" name="type" value="seller" required>
-									<label for="check-seller" class="check-seller">I am a vendor</label>
-								</div>
+								 
 
-								<a href="#" class="d-block mb-5 text-primary">Signup as a vendor?</a>
+								<a href="/auth/merchant/register" class="d-block mb-5 text-primary">Signup as a vendor?</a>
 								<div class="form-checkbox d-flex align-items-center justify-content-between mb-5">
 									<input type="checkbox" class="custom-checkbox" id="remember" name="remember" required="">
 									<label for="remember" class="font-size-md">I agree to the <a href="#"
@@ -78,12 +73,14 @@
 							</form>
 						</div>
 					</div>
-					<p class="text-center">Sign in with social account</p>
+					<p class="text-center">Already a user ? <a href="/auth/user/login" class="text-primary"> Sign In</a></p>
+
+					<!-- <p class="text-center">Sign in with social account</p>
 					<div class="social-icons social-icon-border-color d-flex justify-content-center">
 						<a href="#" class="social-icon social-facebook w-icon-facebook"></a>
 						<a href="#" class="social-icon social-twitter w-icon-twitter"></a>
 						<a href="#" class="social-icon social-google fab fa-google"></a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

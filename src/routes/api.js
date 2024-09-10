@@ -63,7 +63,7 @@ const uploadFileMerchantShop = (req, res, next) => {
 };
 
 router.post("/marketzone/create", MarketZoneController.createMarketZone);
-router.get("marketzone/getzones", MarketZoneController.getAllZones);
+router.get("/marketzone/getzones", MarketZoneController.getAllZones);
 
 router.post(
 	"/merchantshop/create",
@@ -283,6 +283,11 @@ router.put(
 
 router.delete("/productimage/:id", ProductController.deleteProductImagebyId);
 router.delete("/product/:id", isAdmin, ProductController.deleteProdutcById);
+// router.post("/create", ProductCategoryController.createProductCategory);
+// router.post("/create", ProductSubSubCategoryController.createSubSubCategory);
+
+
+
 // router.post(
 // 	"/add-categories/",
 // 	uploadFileCategory,
