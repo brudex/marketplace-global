@@ -10,7 +10,7 @@ const Controller = {};
 
 
 Controller.getUserLogin = (req, res) => {
-	res.render("page/login", {
+	res.render("auth/login", {
 		title: "Login Page",
 		layout: "layout/auth",
 	});
@@ -19,7 +19,7 @@ Controller.getUserLogin = (req, res) => {
 Controller.getUserRegister = (req, res) => {
 	//res.locals.zones = AppGlobalData.zones;
 	req.flash('error', '');
-	res.render("page/register", {
+	res.render("auth/register", {
 		title: "Login Page",
 		layout: "layout/auth",
 		messages: req.flash(),
@@ -30,7 +30,7 @@ Controller.getUserRegister = (req, res) => {
 
 
 Controller.getMerchantLogin = (req, res) => {
-	res.render("page/merchant-login", {
+	res.render("auth/merchant-login", {
 		title: "Merchant Login",
 		layout: "layout/auth",
 		messages: req.flash() // Add this line to pass flash messages to the view
@@ -40,7 +40,7 @@ Controller.getMerchantLogin = (req, res) => {
 Controller.getMerchantRegister = async (req, res) => {
 	const marketZones = await db.MarketZones.findAll({ raw: true });
 	const shopCategories = await db.MerchantShopCategory.findAll({ raw: true });
-	res.render("page/merchant-register", {
+	res.render("auth/merchant-register", {
 		title: "Merchant Registration",
 		layout: "layout/auth",
 		marketZones,
@@ -104,7 +104,7 @@ Controller.registerUser = async (req, res) => {
 		// Check if user already exists
 		const existingUser = await db.User.findOne({ where: { email: req.body.email } });
 		if (existingUser) {
-			return res.render('page/register', {
+			return res.render('auth/register', {
 				error: 'A user with this email already exists',
 				layout: 'layout/auth'
 			});
@@ -151,7 +151,7 @@ Controller.registerMerchant = async (req, res) => {
 			return res.redirect('/auth/merchant/register');
 		}
 		if (password !== confirmPassword) {
-			return res.render('page/merchant-register', {
+			return res.render('auth/merchant-register', {
 				error: 'Passwords do not match',
 				layout: 'layout/auth',
 				marketZones,
@@ -282,7 +282,7 @@ Controller.forgotPasswordUser = async (req, res) => {
 };
 
 Controller.forgotPasswordFormUser = (req, res) => {
-	res.render('page/user-forgotpassword', {
+	res.render('auth/user-forgotpassword', {
 		title: "Forgot Password",
 		layout: 'layout/auth'
 	});
@@ -290,7 +290,7 @@ Controller.forgotPasswordFormUser = (req, res) => {
 
 Controller.resetPasswordFormUser = async (req, res) => {
     const { token } = req.params;
-    res.render('page/user-resetpassword', {
+    res.render('auth/user-resetpassword', {
         title: "Reset Password",
         layout: 'layout/auth',
         token
@@ -336,7 +336,7 @@ Controller.resetPasswordUser = async (req, res) => {
 
 Controller.resetPasswordFormMerchant = async (req, res) => {
     const { token } = req.params;
-    res.render('page/merchant-resetpassword', {
+    res.render('auth/merchant-resetpassword', {
         title: "Reset Merchant Password",
         layout: 'layout/auth',
         token

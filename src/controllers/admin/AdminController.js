@@ -3,6 +3,7 @@ const db = require("../../models");
 const { Op } = require("sequelize");
 const { format } = require("date-fns");
 const Controller = {};
+module.exports = Controller;
 const {
 	Profile,
 	Product,
@@ -59,7 +60,7 @@ Controller.index = async (req, res) => {
 		productSubcategory,
 	};
 
-	res.render("page/admin/home", {
+	res.render("admin/home", {
 		title: "Dashboard",
 		layout: "layout/admin-layout",
 		data: data,
