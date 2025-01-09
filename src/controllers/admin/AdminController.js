@@ -1,5 +1,8 @@
 const { Sequelize, QueryTypes } = require("sequelize");
-const db = require("../models");
+const db = require("../../models");
+const { Op } = require("sequelize");
+const { format } = require("date-fns");
+const Controller = {};
 const {
 	Profile,
 	Product,
@@ -15,8 +18,8 @@ const {
 	GoogleAuthService,
 	MarketZones,
 } = db.sequelize.models;
-const { Op } = require("sequelize");
-const { format } = require("date-fns");
+
+
 
 function convertDateAgo(date) {
 	console.log("date>>>>>>>>>>>>>>>>>>>>>>>", date);
@@ -32,21 +35,19 @@ function convertDateAgo(date) {
 	return `${diffDays} days ago`;
 }
 
-const manageCategories = async (req, res) => {
+Controller.manageCategories = async (req, res) => {
 	res.render("page/admin/category/manageCategories", {
 		title: "Manage Categories",
 		layout: "layout/admin-layout",
 	});
 };
 
-const index = async (req, res) => {
+Controller.index = async (req, res) => {
 	const users = await User.count();
 	const products = await Product.count();
-	//const transactions = await Transaction.count();
 	const merchantShops = await MerchantShop.count();
 	const merchantShopCategory = await MerchantShopCategory.count();
 	const productCategory = await ProductCategory.count();
-
 	const productSubcategory = await ProductSubcategory.count();
 
 	const data = {
@@ -65,8 +66,7 @@ const index = async (req, res) => {
 	});
 };
 
-const products = async (req, res) => {
-	//fetch all products
+Controller.products = async (req, res) => {
 	try {
 		const products = await Product.findAll({
 			raw: true,
@@ -78,33 +78,18 @@ const products = async (req, res) => {
 				where: { productUuid: product.uuid },
 			});
 			product.productFiles = productFiles;
-			// get Zone
-			// const zone = await MarketZones.findOne({
-			// 	where: { zoneUuid: product.zoneUuid },
-			// });
-			// product.zone = zone;
 
-			// get Product Category
 			const productCategory = await ProductCategory.findOne({
 				where: { uuid: product.categoryUuid },
 				raw: true,
 			});
 			product.productCategory = productCategory;
-			/// Get Product Sub Category
+
 			const productSubCategory = await ProductSubcategory.findOne({
 				where: { uuid: product.subCategoryUuid },
 				raw: true,
 			});
 			product.productSubCategory = productSubCategory;
-
-			// Get Merchant category
-
-			// const merchantShopCategory = await MerchantShopCategory.findOne({
-			// 	where: { uuid: product.merchantShopCategoryUuid },
-			// });
-			// product.merchantShopCategory = merchantShopCategory;
-
-			// Get Merchant Shop
 
 			const merchantShop = await MerchantShop.findOne({
 				where: { uuid: product.merchantShopUuid },
@@ -129,7 +114,7 @@ const products = async (req, res) => {
 	}
 };
 
-const getProductsById = async (req, res) => {
+Controller.getProductsById = async (req, res) => {
 	try {
 		const product = await Product.findByPk(req.params.uuid, {
 			raw: true,
@@ -143,29 +128,16 @@ const getProductsById = async (req, res) => {
 			where: { productUuid: product.uuid },
 		});
 		product.productFiles = productFiles;
-		// get Zone
-		// const zone = await MarketZones.findOne({
-		// 	where: { zoneUuid: product.zoneUuid },
-		// });
-		// product.zone = zone;
 
-		// get Product Category
 		const productCategory = await ProductCategory.findOne({
 			where: { uuid: product.categoryUuid },
 		});
 		product.productCategory = productCategory;
-		/// Get Product Sub Category
+
 		const productSubCategory = await ProductSubcategory.findOne({
 			where: { uuid: product.subCategoryUuid },
 		});
 		product.productSubCategory = productSubCategory;
-
-		// Get Merchant category
-
-		// const merchantShopCategory = await MerchantShopCategory.findOne({
-		// 	where: { uuid: product.merchantShopCategoryUuid },
-		// });
-		// product.merchantShopCategory = merchantShopCategory;
 
 		const merchantShop = await MerchantShop.findOne({
 			where: { uuid: product.merchantShopUuid },
@@ -192,11 +164,10 @@ const getProductsById = async (req, res) => {
 	}
 };
 
-const renderAddProduct = async (req, res) => {
+Controller.renderAddProduct = async (req, res) => {
 	const marketZones = await MarketZones.findAll({ raw: true });
 	const merchantShops = await MerchantShop.findAll({ raw: true });
 	console.log("marketZones>>", marketZones);
-	// const productCategory = await ProductCategory.findAll({ raw: true });
 
 	res.render("page/admin/add-product", {
 		title: "Products",
@@ -208,8 +179,7 @@ const renderAddProduct = async (req, res) => {
 	});
 };
 
-const getMerchantshops = async (req, res) => {
-	//fetch all products
+Controller.getMerchantshops = async (req, res) => {
 	try {
 		const m_shops = await MerchantShop.findAll({
 			raw: true,
@@ -226,14 +196,11 @@ const getMerchantshops = async (req, res) => {
 			console.log("mshopCat", mshopCat);
 			mshop.merchantShopCategory = mshopCat;
 
-			// get  Merchant
 			const merchant = await Merchant.findOne({
 				raw: true,
 				where: { uuid: mshop.merchantUuid },
 			});
 			mshop.merchant = merchant;
-
-			// get Zone
 
 			const zone = await MarketZones.findOne({
 				raw: true,
@@ -260,8 +227,7 @@ const getMerchantshops = async (req, res) => {
 	}
 };
 
-const getMerchantshopsCategory = async (req, res) => {
-	//fetch all products
+Controller.getMerchantshopsCategory = async (req, res) => {
 	try {
 		const m_shopscategories = await MerchantShopCategory.findAll({
 			raw: true,
@@ -297,8 +263,7 @@ const getMerchantshopsCategory = async (req, res) => {
 	}
 };
 
-const getProductCategories = async (req, res) => {
-	//fetch all products
+Controller.getProductCategories = async (req, res) => {
 	try {
 		const productCats = await ProductCategory.findAll({
 			raw: true,
@@ -313,8 +278,6 @@ const getProductCategories = async (req, res) => {
 			});
 
 			mProductCat.merchantShopCategory = mshopCat;
-
-			// get  Merchant
 
 			const zone = await MarketZones.findOne({
 				raw: true,
@@ -341,7 +304,7 @@ const getProductCategories = async (req, res) => {
 	}
 };
 
-const renderAddMerchantShop = async (req, res) => {
+Controller.renderAddMerchantShop = async (req, res) => {
 	const marketZones = await MarketZones.findAll({ raw: true });
 	const merchants = await Merchant.findAll({ raw: true });
 	console.log("marketZones>>", marketZones);
@@ -355,7 +318,7 @@ const renderAddMerchantShop = async (req, res) => {
 	});
 };
 
-const renderAddMerchantShopCategory = async (req, res) => {
+Controller.renderAddMerchantShopCategory = async (req, res) => {
 	const marketZones = await MarketZones.findAll({ raw: true });
 
 	res.render("page/admin/add-merchant-shop-category", {
@@ -367,7 +330,7 @@ const renderAddMerchantShopCategory = async (req, res) => {
 	});
 };
 
-const renderAddProductCategory = async (req, res) => {
+Controller.renderAddProductCategory = async (req, res) => {
 	const marketZones = await MarketZones.findAll({ raw: true });
 
 	console.log("marketZones>>", marketZones);
@@ -380,7 +343,7 @@ const renderAddProductCategory = async (req, res) => {
 	});
 };
 
-const renderAddProductSubCategory = async (req, res) => {
+Controller.renderAddProductSubCategory = async (req, res) => {
 	const productCategories = await ProductCategory.findAll({ raw: true });
 
 	res.render("page/admin/add-product-subcategory", {
@@ -392,7 +355,7 @@ const renderAddProductSubCategory = async (req, res) => {
 	});
 };
 
-const getMerchantShopCategoryById = async (req, res) => {
+Controller.getMerchantShopCategoryById = async (req, res) => {
 	try {
 		const mshopCategory = await MerchantShopCategory.findOne({
 			where: { uuid: req.params.uuid },
@@ -427,7 +390,7 @@ const getMerchantShopCategoryById = async (req, res) => {
 	}
 };
 
-const getMerchantShoptById = async (req, res) => {
+Controller.getMerchantShoptById = async (req, res) => {
 	try {
 		const mshop = await MerchantShop.findOne({
 			where: { uuid: req.params.uuid },
@@ -441,14 +404,11 @@ const getMerchantShoptById = async (req, res) => {
 
 		mshop.merchantShopCategory = mshopCat;
 
-		// get  Merchant
 		const merchant = await Merchant.findOne({
 			raw: true,
 			where: { uuid: mshop.merchantUuid },
 		});
 		mshop.merchant = merchant;
-
-		// get Zone
 
 		const zone = await MarketZones.findAll({
 			raw: true,
@@ -480,7 +440,7 @@ const getMerchantShoptById = async (req, res) => {
 	}
 };
 
-const getProductCategoryById = async (req, res) => {
+Controller.getProductCategoryById = async (req, res) => {
 	try {
 		const productCat = await ProductCategory.findOne({
 			where: { uuid: req.params.uuid },
@@ -493,8 +453,6 @@ const getProductCategoryById = async (req, res) => {
 		});
 
 		productCat.merchantShopCategory = mshopCat;
-
-		// get Zone
 
 		const zone = await MarketZones.findAll({
 			raw: true,
@@ -524,8 +482,7 @@ const getProductCategoryById = async (req, res) => {
 	}
 };
 
-const getProductSubCategories = async (req, res) => {
-	//fetch all products
+Controller.getProductSubCategories = async (req, res) => {
 	try {
 		const productSubCats = await ProductSubcategory.findAll({
 			raw: true,
@@ -539,8 +496,6 @@ const getProductSubCategories = async (req, res) => {
 				where: { uuid: mProductCat.productCategoryUuid },
 			});
 			mProductCat.productCategory = productCat;
-
-			// get  Merchant
 
 			mProductCat.createdAt = format(mProductCat.createdAt, "do MMMM, yyyy");
 		}
@@ -559,7 +514,8 @@ const getProductSubCategories = async (req, res) => {
 		});
 	}
 };
-const getProductSubCategoryById = async (req, res) => {
+
+Controller.getProductSubCategoryById = async (req, res) => {
 	try {
 		const productSubCat = await ProductSubcategory.findOne({
 			where: { uuid: req.params.uuid },
@@ -591,8 +547,7 @@ const getProductSubCategoryById = async (req, res) => {
 	}
 };
 
-const getMerchants = async (req, res) => {
-	//fetch all products
+Controller.getMerchants = async (req, res) => {
 	try {
 		let merchants = await Merchant.findAll({
 			raw: true,
@@ -618,7 +573,8 @@ const getMerchants = async (req, res) => {
 		});
 	}
 };
-const renderAddMerchant = async (req, res) => {
+
+Controller.renderAddMerchant = async (req, res) => {
 	const marketZones = await MarketZones.findAll({ raw: true });
 
 	console.log("marketZones>>", marketZones);
@@ -628,14 +584,14 @@ const renderAddMerchant = async (req, res) => {
 	});
 };
 
-const renderAddUser = async (req, res) => {
+Controller.renderAddUser = async (req, res) => {
 	res.render("page/admin/add-user", {
 		title: "User",
 		layout: "layout/admin-layout",
 	});
 };
 
-const getMerchantById = async (req, res) => {
+Controller.getMerchantById = async (req, res) => {
 	try {
 		const merchant = await Merchant.findOne({
 			where: { uuid: req.params.uuid },
@@ -668,7 +624,7 @@ const getMerchantById = async (req, res) => {
 	}
 };
 
-const categories = async (req, res) => {
+Controller.categories = async (req, res) => {
 	const categories = await Category.findAll({
 		raw: true,
 	});
@@ -680,14 +636,14 @@ const categories = async (req, res) => {
 	});
 };
 
-const addcategories = async (req, res) => {
+Controller.addcategories = async (req, res) => {
 	res.render("page/admin/addcategories", {
 		title: "Categories",
 		layout: "layout/admin-layout",
 	});
 };
 
-const getCategoryById = async (req, res) => {
+Controller.getCategoryById = async (req, res) => {
 	const category = await Category.findByPk(req.params.uuid, {
 		raw: true,
 	});
@@ -702,7 +658,7 @@ const getCategoryById = async (req, res) => {
 	});
 };
 
-const users = async (req, res) => {
+Controller.users = async (req, res) => {
 	const users = await User.findAll({
 		raw: true,
 	});
@@ -733,7 +689,7 @@ const users = async (req, res) => {
 	});
 };
 
-const transactions = async (req, res) => {
+Controller.transactions = async (req, res) => {
 	const transactions = await Transaction.findAll({
 		raw: true,
 		order: [["createdAt", "DESC"]],
@@ -784,7 +740,7 @@ const transactions = async (req, res) => {
 	});
 };
 
-const deleteProduct = async (req, res) => {
+Controller.deleteProduct = async (req, res) => {
 	const { uuid } = req.params;
 	const product = await ProductService.findOne({
 		where: { uuid: uuid },
@@ -796,7 +752,7 @@ const deleteProduct = async (req, res) => {
 	res.redirect("/admin/ads");
 };
 
-const deleteCategory = async (req, res) => {
+Controller.deleteCategory = async (req, res) => {
 	const { id } = req.params;
 	const category = await Category.findOne({
 		where: { uuid: id },
@@ -807,7 +763,7 @@ const deleteCategory = async (req, res) => {
 	res.redirect("/admin/categories");
 };
 
-const deleteUser = async (req, res) => {
+Controller.deleteUser = async (req, res) => {
 	const { uuid } = req.params;
 	const user = await User.findOne({
 		where: { uuid: uuid },
@@ -823,39 +779,4 @@ const deleteUser = async (req, res) => {
 		}
 	}
 	res.redirect("/admin/users");
-};
-
-module.exports = {
-	manageCategories,
-	index,
-	products,
-	renderAddProduct,
-	categories,
-	addcategories,
-	getCategoryById,
-	getProductsById,
-	users,
-	transactions,
-	deleteProduct,
-	deleteCategory,
-	deleteUser,
-
-	getMerchantshops,
-	renderAddMerchantShop,
-	getMerchantShoptById,
-
-	renderAddMerchant,
-	getMerchantById,
-	getMerchants,
-
-	renderAddProductCategory,
-	getProductCategoryById,
-	getProductCategories,
-	getProductSubCategoryById,
-	getProductSubCategories,
-	renderAddProductSubCategory,
-	getMerchantshopsCategory,
-	getMerchantShopCategoryById,
-	renderAddMerchantShopCategory,
-	renderAddUser,
 };

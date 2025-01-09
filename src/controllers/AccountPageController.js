@@ -1,6 +1,8 @@
 const { format } = require("date-fns");
 const db = require("../models");
 const { Sequelize } = require("sequelize");
+const Controller = {};
+
 const {
 	Profile,
 	Product,
@@ -312,7 +314,7 @@ const getMerchantShoptById = async (req, res) => {
 	}
 };
 
- 
+
 module.exports = {
 	getHomePage,
 	renderAddMerchantShop,
