@@ -15,9 +15,9 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="sign-up">
 							<!-- Add error message display -->
-							<% if (error) { %>
+							<% if (data.error) { %>
 								<div class="alert alert-danger" role="alert">
-									<%= error %>
+									<%= data.error %>
 								</div>
 							<% } %>
 							<form action="/auth/user/register" method="POST">
@@ -44,8 +44,6 @@
 									<input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required>
 								</div>
 
-
-
 								<div id="customerDiv" style="display: none;">
 									<!-- Customer content here -->
 								</div>
@@ -54,14 +52,14 @@
 
 								<div id="sellerDiv" style="display: none;">
 
- 
+
 									<div class="form-group mb-5">
 										<label>Phone Number *</label>
 										<input type="text" class="form-control" name="phoneNumber" id="phoneNumber">
 									</div>
 
 								</div>
-								 
+
 
 								<a href="/auth/merchant/register" class="d-block mb-5 text-primary">Signup as a vendor?</a>
 								<div class="form-checkbox d-flex align-items-center justify-content-between mb-5">

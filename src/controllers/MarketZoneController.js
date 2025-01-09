@@ -13,7 +13,6 @@ const {
 const MarketZoneController = {
 	async createMarketZone(req, res) {
 		const { name, description } = req.body;
-
 		const marketZone = await MarketZones.create({ name, description });
 		await marketZone.save();
 		res.json({

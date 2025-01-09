@@ -6,13 +6,11 @@ const { v4: uuidv4 } = require("uuid");
 const { z } = require("zod");
 async function updateUserPasswor(password) {
 	const saltHash = await crypto.randomBytes(32).toString();
-
 	const hashPassword = await crypto
 		.pbkdf2Sync(password, saltHash, 10000, 64, "sha512")
 		.toString("hex");
 	user.password = hashPassword;
 	user.password_key = saltHash;
-
 	return { password, password };
 }
 
@@ -138,10 +136,10 @@ const MerchantController = {
 				UPDATE public."Merchant"
 				SET
 				first_name = :firstName,
-				last_name = :lastName,	
+				last_name = :lastName,
 				full_name=:fullName,
-				date_of_birth=:dateOfBirth, 
-				email=:email, 
+				date_of_birth=:dateOfBirth,
+				email=:email,
 				password=:password,
 				password_key=:password_key,
 				phone_number=:phoneNumber,
@@ -179,9 +177,9 @@ const MerchantController = {
 				UPDATE public."Merchant"
 				SET
 				first_name =:firstName,
-				last_name =:lastName,	
+				last_name =:lastName,
 				full_name=:fullName,
-				date_of_birth=:dateOfBirth, 
+				date_of_birth=:dateOfBirth,
 				email=:email,
 				phone_number=:phoneNumber,
 				id_card_number=:idCardNumber,

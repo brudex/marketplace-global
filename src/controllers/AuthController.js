@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const Merchant = require("../models/m_merchant");
 const passport = require("passport");
 const crypto = require('crypto');
-const sendEmail = require('../utils/sendMail');  
+const sendEmail = require('../utils/sendMail');
 const bcrypt = require('bcryptjs');
 const Controller = {};
 
@@ -18,12 +18,16 @@ Controller.getUserLogin = (req, res) => {
 
 Controller.getUserRegister = (req, res) => {
 	//res.locals.zones = AppGlobalData.zones;
+	req.flash('error', '');
 	res.render("page/register", {
 		title: "Login Page",
 		layout: "layout/auth",
+		messages: req.flash(),
+		error:"",
+		data:{error:""}
 	});
 };
- 
+
 
 Controller.getMerchantLogin = (req, res) => {
 	res.render("page/merchant-login", {
@@ -62,7 +66,7 @@ Controller.loginUser = async (req, res) => {
 			req.flash('error', 'Invalid email or password');
 			return res.redirect('/auth/user/login');
 		}	// If no user found or password incorrect
-		 
+
 	} catch (error) {
 		console.error("Login error:", error);
 		req.flash('error', error.message || 'An error occurred during login');
@@ -87,7 +91,7 @@ Controller.loginMerchant = async (req, res) => {
 			req.flash('error', 'Invalid email or password');
 			return res.redirect('/auth/merchant/login');
 		}
-		 
+
 	} catch (error) {
 		console.error("Login error:", error);
 		req.flash('error', error.message || 'An error occurred during login');
@@ -96,7 +100,7 @@ Controller.loginMerchant = async (req, res) => {
 }
 
 Controller.registerUser = async (req, res) => {
-	try { 
+	try {
 		// Check if user already exists
 		const existingUser = await db.User.findOne({ where: { email: req.body.email } });
 		if (existingUser) {
@@ -163,7 +167,7 @@ Controller.registerMerchant = async (req, res) => {
 			firstName:req.body.firstName,
 			lastName:req.body.lastName,
 			fullName: `${req.body.firstName} ${req.body.lastName}`,
-			dateOfBirth: req.body.dateOfBirth, 
+			dateOfBirth: req.body.dateOfBirth,
 		}
 		const merchant = await db.Merchant.create(merchantData);
         const merchantShopData ={
@@ -278,15 +282,15 @@ Controller.forgotPasswordUser = async (req, res) => {
 };
 
 Controller.forgotPasswordFormUser = (req, res) => {
-	res.render('page/user-forgotpassword', { 
+	res.render('page/user-forgotpassword', {
 		title: "Forgot Password",
-		layout: 'layout/auth' 
+		layout: 'layout/auth'
 	});
 };
 
 Controller.resetPasswordFormUser = async (req, res) => {
     const { token } = req.params;
-    res.render('page/user-resetpassword', { 
+    res.render('page/user-resetpassword', {
         title: "Reset Password",
         layout: 'layout/auth',
         token
@@ -332,7 +336,7 @@ Controller.resetPasswordUser = async (req, res) => {
 
 Controller.resetPasswordFormMerchant = async (req, res) => {
     const { token } = req.params;
-    res.render('page/merchant-resetpassword', { 
+    res.render('page/merchant-resetpassword', {
         title: "Reset Merchant Password",
         layout: 'layout/auth',
         token
